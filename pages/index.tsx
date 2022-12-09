@@ -1,9 +1,8 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
-import PersonProfile from '../compoents/PersonProfile'
-import { useEvmNativeBalance } from '@moralisweb3/next'
 import Link from 'next/link'
+
+import { useEvmNativeBalance } from '@moralisweb3/next'
 
 const Home: NextPage = () => {
   const address = '0xc14B8187368738532c71318cD77e7e28Ed9d53d3'
@@ -13,7 +12,7 @@ const Home: NextPage = () => {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center py-2">
       <Head>
-        <title>Create Next App</title>
+        <title>Join3</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div>

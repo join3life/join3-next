@@ -19,7 +19,7 @@ const UserProfile = () => {
             </Link>
             <Link
               className="w-[100px] h-[40px] text-black bg-white flex justify-center items-center rounded-lg"
-              href="UserProfile/ProJects"
+              href="UserProfile/Projects"
             >
               ProJects
             </Link>

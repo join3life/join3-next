@@ -11,28 +11,16 @@ const UserProfile = () => {
         </div>
         <div className="w-[700px]">
           <div className="flex justify-evenly">
-            <Link
-              className="w-[100px] h-[40px] text-white bg-black flex justify-center items-center rounded-lg"
-              href="UserProfile/Feed"
-            >
+            <Link className="btn w-[100px]" href="UserProfile/Feed">
               Feed
             </Link>
-            <Link
-              className="w-[100px] h-[40px] text-black bg-white flex justify-center items-center rounded-lg"
-              href="UserProfile/Projects"
-            >
+            <Link className="btn w-[100px]" href="UserProfile/Projects">
               ProJects
             </Link>
-            <Link
-              className="w-[100px] h-[40px] text-black bg-white flex justify-center items-center rounded-lg"
-              href="UserProfile/Skills"
-            >
+            <Link className="btn w-[100px]" href="UserProfile/Skills">
               Skills
             </Link>
-            <Link
-              className="w-[100px] h-[40px] text-black bg-white flex justify-center items-center rounded-lg"
-              href="UserProfile/Interests"
-            >
+            <Link className="btn w-[100px]" href="UserProfile/Interests">
               Interests
             </Link>
           </div>

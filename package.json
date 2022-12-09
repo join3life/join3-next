@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "@moralisweb3/next": "^2.8.2",
+    "daisyui": "^2.42.1",
     "ethers": "^5.7.2",
     "moralis": "^2.8.2",
     "next": "latest",

@@ -7,7 +7,7 @@ import { AiFillTwitterCircle, AiFillGithub } from 'react-icons/ai'
 /**
  * @package
  */
-export function Layout({ children }: { children: ReactNode }) {
+export function UserLayoutComponent({ children }: { children: ReactNode }) {
   //在这里写slider bar和header的layout布局 组件抽离再封装
   return (
     <>
@@ -80,6 +80,6 @@ export function Layout({ children }: { children: ReactNode }) {
 /**
  * @package
  */
-export function HomeLayout(page: ReactNode): JSX.Element {
-  return <Layout>{page}</Layout>
+export function UserLayout(page: ReactNode): JSX.Element {
+  return <UserLayoutComponent>{page}</UserLayoutComponent>
 }

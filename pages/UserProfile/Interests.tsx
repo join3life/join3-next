@@ -1,10 +1,10 @@
 import type { NextPageWithLayout } from '../_app'
-import { HomeLayout } from '../../components/layouts'
+import { UserLayout } from '../../components/layouts'
 
 const Interests: NextPageWithLayout = () => {
   return <div>Interests</div>
 }
 
-Interests.getLayout = HomeLayout
+Interests.getLayout = UserLayout
 
 export default Interests

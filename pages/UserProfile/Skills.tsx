@@ -1,10 +1,10 @@
 import type { NextPageWithLayout } from '../_app'
-import { HomeLayout } from '../../components/layouts'
+import { UserLayout } from '../../components/layouts'
 
 const Skills: NextPageWithLayout = () => {
   return <div>Skills</div>
 }
 
-Skills.getLayout = HomeLayout
+Skills.getLayout = UserLayout
 
 export default Skills

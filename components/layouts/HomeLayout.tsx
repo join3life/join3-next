@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import { ReactNode } from 'react'
 import { BiEdit } from 'react-icons/bi'
+import { FaDiscord } from 'react-icons/fa'
+import { AiFillTwitterCircle, AiFillGithub } from 'react-icons/ai'
 
 /**
  * @package
@@ -27,9 +29,28 @@ export function Layout({ children }: { children: ReactNode }) {
                   <BiEdit color="white" size={20} className="m-auto" />
                 </div>
               </div>
-              <div className="">follow</div>
-              <div className="">introduce</div>
-              <div className="">other link</div>
+              <div className="mt-5 w-[180px] flex justify-between text-sm">
+                <div className="">
+                  10 <span className="text-[#999]">Following</span>
+                </div>
+                <div className="">
+                  100 <span className="text-[#999]">Followed</span>
+                </div>
+              </div>
+              <div className="mt-4 text-base">
+                there seems to be nothing to introduce
+              </div>
+              <div className="mt-4 flex gap-2">
+                <div className="cursor-pointer">
+                  <AiFillTwitterCircle size={26} />
+                </div>
+                <div className="cursor-pointer">
+                  <AiFillGithub size={26} />
+                </div>
+                <div className="cursor-pointer">
+                  <FaDiscord size={26} />
+                </div>
+              </div>
             </div>
             <div className="w-[350px] h-[390px] bg-[#F5F5F5] rounded-lg"></div>
           </div>

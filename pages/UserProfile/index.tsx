@@ -1,4 +1,6 @@
-import { HomeLayout } from '../../components/layout/HomeLayout'
+import React from 'react'
+import { HomeLayout } from '../../components/layouts'
+
 import type { NextPageWithLayout } from '../_app'
 
 const UserProfile: NextPageWithLayout = () => {

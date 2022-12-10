@@ -1,16 +1,11 @@
 import React, { ReactElement } from 'react'
 import type { NextPageWithLayout } from '../_app'
-import HomeLayout from '../../components/layout/homelayout'
-
+import {HomeLayout} from '../../components/layout'
 
 const Feed:NextPageWithLayout = () => {
   return <div>Feed</div>
 }
 
-Feed.getLayout = function getLayout(page: ReactElement){
-  return (
-    <HomeLayout>{page}</HomeLayout>    
-  )
-}
+Feed.getLayout = HomeLayout
 
 export default Feed

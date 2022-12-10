@@ -3,11 +3,14 @@ import { ReactNode } from 'react'
 import { BiEdit } from 'react-icons/bi'
 import { FaDiscord } from 'react-icons/fa'
 import { AiFillTwitterCircle, AiFillGithub } from 'react-icons/ai'
+import { useRouter } from 'next/router'
 
 /**
  * @package
  */
 export function UserLayoutComponent({ children }: { children: ReactNode }) {
+  const router = useRouter()
+  console.log(router)
   //在这里写slider bar和header的layout布局 组件抽离再封装
   return (
     <>
@@ -56,16 +59,44 @@ export function UserLayoutComponent({ children }: { children: ReactNode }) {
           </div>
           <div className="w-[700px]">
             <div className="flex justify-evenly">
-              <Link className="btn w-[100px]" href="/UserProfile/Feed">
+              <Link
+                className={
+                  router.pathname === '/UserProfile/Feed'
+                    ? 'btn w-[100px]'
+                    : 'btn w-[100px] bg-white text-black hover:text-white'
+                }
+                href="/UserProfile/Feed"
+              >
                 Feed
               </Link>
-              <Link className="btn w-[100px]" href="/UserProfile/Projects">
+              <Link
+                className={
+                  router.pathname === '/UserProfile/Projects'
+                    ? 'btn w-[100px]'
+                    : 'btn w-[100px] bg-white text-black hover:text-white'
+                }
+                href="/UserProfile/Projects"
+              >
                 ProJects
               </Link>
-              <Link className="btn w-[100px]" href="/UserProfile/Skills">
+              <Link
+                className={
+                  router.pathname === '/UserProfile/Skills'
+                    ? 'btn w-[100px]'
+                    : 'btn w-[100px] bg-white text-black hover:text-white'
+                }
+                href="/UserProfile/Skills"
+              >
                 Skills
               </Link>
-              <Link className="btn w-[100px]" href="/UserProfile/Interests">
+              <Link
+                className={
+                  router.pathname === '/UserProfile/Interests'
+                    ? 'btn w-[100px]'
+                    : 'btn w-[100px] bg-white text-black hover:text-white'
+                }
+                href="/UserProfile/Interests"
+              >
                 Interests
               </Link>
             </div>

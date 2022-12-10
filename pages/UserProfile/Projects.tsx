@@ -1,13 +1,10 @@
-import { ReactElement } from 'react'
 import type { NextPageWithLayout } from '../_app'
-import HomeLayout from '../../components/layout/HomeLayout'
+import { HomeLayout } from '../../components/layout'
 
 const Projects: NextPageWithLayout = () => {
   return <div>Projects</div>
 }
 
-Projects.getLayout = function getLayout(page: ReactElement) {
-  return <HomeLayout>{page}</HomeLayout>
-}
+Projects.getLayout = HomeLayout
 
 export default Projects

@@ -20,7 +20,7 @@ const Feed: NextPageWithLayout = () => {
             />
           </div>
           <div className="w-[550px]">
-            <div className="w-[80px] h-[30px] bg-[#C9CDD4] rounded-xl f-c-c">
+            <div className="w-[80px] h-[30px] bg-[#C9CDD4] rounded-xl f-c-c cursor-pointer">
               Skill
             </div>
             <div className="text-[12px] mt-3 line-clamp-2">
@@ -50,7 +50,7 @@ const Feed: NextPageWithLayout = () => {
             />
           </div>
           <div className="w-[550px]">
-            <div className="w-[80px] h-[30px] bg-[#C9CDD4] rounded-xl f-c-c">
+            <div className="w-[80px] h-[30px] bg-[#C9CDD4] rounded-xl f-c-c cursor-pointer">
               Skill
             </div>
             <div className="text-[12px] mt-3 line-clamp-2">
@@ -80,7 +80,7 @@ const Feed: NextPageWithLayout = () => {
             />
           </div>
           <div className="w-[550px]">
-            <div className="w-[80px] h-[30px] bg-[#C9CDD4] rounded-xl f-c-c">
+            <div className="w-[80px] h-[30px] bg-[#C9CDD4] rounded-xl f-c-c cursor-pointer">
               Skill
             </div>
             <div className="text-[12px] mt-3 line-clamp-2">

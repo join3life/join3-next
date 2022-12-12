@@ -1,8 +1,9 @@
-import { useState, FC } from 'react'
+import { useState } from 'react'
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons'
 import { message, Select, Upload } from 'antd'
 import type { UploadChangeParam } from 'antd/es/upload'
 import type { RcFile, UploadFile, UploadProps } from 'antd/es/upload/interface'
+import { MdDeleteForever } from 'react-icons/md'
 
 const Edit = () => {
   const selectOptions = [
@@ -26,7 +27,12 @@ const Edit = () => {
 
   const [loading, setLoading] = useState(false)
   const [imageUrl, setImageUrl] = useState<string>()
-  const [mediaList, setMediaList] = useState([1])
+  const [mediaList, setMediaList] = useState([
+    {
+      media: 'twitter',
+      url: ''
+    }
+  ])
 
   const getBase64 = (img: RcFile, callback: (url: string) => void) => {
     const reader = new FileReader()
@@ -73,7 +79,7 @@ const Edit = () => {
   }
 
   return (
-    <div className="px-[160px] py-[72px]">
+    <div className="px-[280px] py-[72px]">
       <div className="flex justify-between">
         <div className="text-[32px] font-bold">Edit Profile</div>
         <div className="btn w-[100px] h-[40px]">Save</div>
@@ -98,35 +104,70 @@ const Edit = () => {
       </div>
       <div className="mt-6">
         <div className="text-[#666] mb-2">Name</div>
-        <input type="text" className="input input-bordered w-full max-w-xs" />
+        <input
+          type="text"
+          className="input input-bordered h-10 w-full max-w-xs"
+        />
       </div>
       <div className="mt-6">
         <div className="text-[#666] mb-2">Bio</div>
-        <input type="text" className="input input-bordered w-full max-w-xs" />
+        <textarea
+          className="textarea textarea-bordered w-full max-w-xs"
+          placeholder="Bio"
+        />
       </div>
       <div className="mt-6">
-        <div className="flex gap-9">
+        <div className="flex gap-[280px]">
           <div className="text-[#666]">Social Media</div>
           <div
-            className="text-[#999] text-[14px] f-c-c cursor-pointer"
-            onClick={() => setMediaList([...mediaList, 1])}
+            className="text-[#fff] w-[80px] h-[30px] rounded-lg bg-[#333] text-[14px] f-c-c cursor-pointer"
+            onClick={() => setMediaList([...mediaList, { media: '', url: '' }])}
           >
-            + Add Social Media
+            Add
           </div>
         </div>
-        {mediaList.map((item, index) => {
+        {mediaList.map(item => {
           return (
-            <div className="mt-2">
+            <div className="mt-2 flex items-center">
               <Select
                 defaultValue="twitter"
                 style={{ width: 120 }}
                 onChange={handleChangeSelect}
-                options={selectOptions}
+                options={[
+                  {
+                    value: 'github',
+                    label: 'github',
+                    disabled: mediaList.some(i => i.media === 'github')
+                  },
+                  {
+                    value: 'twitter',
+                    label: 'twitter',
+                    disabled: mediaList.some(i => i.media === 'twitter')
+                  },
+                  {
+                    value: 'discord',
+                    label: 'discord',
+                    disabled: mediaList.some(i => i.media === 'discord')
+                  },
+                  {
+                    value: 'youtube',
+                    label: 'youtube',
+                    disabled: mediaList.some(i => i.media === 'youtube')
+                  }
+                ]}
               />
               <input
                 type="text"
-                className="input input-bordered w-full max-w-xs h-8 ml-3 mt-1"
+                className="input input-bordered w-full max-w-xs h-8 ml-3"
               />
+              <div
+                className="cursor-pointer pl-1"
+                onClick={() =>
+                  setMediaList([...mediaList.filter(i => i !== item)])
+                }
+              >
+                <MdDeleteForever size={24} color="#999" />
+              </div>
             </div>
           )
         })}

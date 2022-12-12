@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { ReactNode } from 'react'
 import { BiEdit } from 'react-icons/bi'
-import { FaDiscord } from 'react-icons/fa'
+import { FaChevronCircleRight, FaDiscord } from 'react-icons/fa'
 import { AiFillTwitterCircle, AiFillGithub } from 'react-icons/ai'
 import { useRouter } from 'next/router'
 
@@ -58,7 +58,33 @@ export function UserLayoutComponent({ children }: { children: ReactNode }) {
                 </div>
               </div>
             </div>
-            <div className="w-[350px] h-[390px] bg-[#F5F5F5] rounded-lg"></div>
+            <div className="w-[350px] h-[390px] bg-[#F5F5F5] rounded-lg px-7 py-5">
+              <div className="flex justify-between">
+                <div className="flex gap-5">
+                  <div className="text-[#333] text-[14px] cursor-pointer">
+                    joined DAO
+                  </div>
+                  <div className="text-[#999] text-[14px] cursor-pointer">
+                    following DAO
+                  </div>
+                </div>
+                <div className="cursor-pointer">
+                  <FaChevronCircleRight size={20} color="#C9CDD4" />
+                </div>
+              </div>
+              <div className="mt-5">
+                {[0, 1, 2, 3, 4].map(() => {
+                  return (
+                    <div className="flex gap-3 items-center mt-[18px]">
+                      <div className="w-[44px] h-[44px] rounded-[50%] overflow-clip cursor-pointer">
+                        <img src="https://placeimg.com/192/192/people" alt="" />
+                      </div>
+                      <div className="cursor-pointer text-[#333]">DAO</div>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
           </div>
           <div className="w-[700px]">
             <div className="flex justify-evenly">

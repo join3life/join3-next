@@ -21,7 +21,7 @@ const Home: NextPage = () => {
       </div>
       <div>begin here</div>
       <div className="flex gap-2">
-        <Link href="/UserProfile">
+        <Link href="/UserProfile/Feed">
           <div className="p-2 border rounded-lg">to user-profile</div>
         </Link>
         <Link href="/OrganizationProfile">

@@ -1,6 +1,6 @@
 import type { NextPageWithLayout } from '../_app'
 import { UserLayout } from '../../components/layouts'
-import { AiOutlineEyeInvisible } from 'react-icons/ai'
+import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai'
 
 const Projects: NextPageWithLayout = () => {
   return (
@@ -10,7 +10,11 @@ const Projects: NextPageWithLayout = () => {
           <div className="w-[200px] h-[240px] group rounded-xl overflow-clip cursor-pointer hover:shadow-2xl transition duration-300">
             <div className="w-full h-[160px] bg-[#C9CDD4] relative">
               <div className="absolute top-1 right-2 hidden group-hover:block">
-                <AiOutlineEyeInvisible />
+                <label className="swap">
+                  <input type="checkbox" />
+                  <AiOutlineEyeInvisible />
+                  <AiOutlineEye />
+                </label>
               </div>
             </div>
             <div className="w-full h-[80px] bg-[#F5F5F5] p-3 text-[14px]">

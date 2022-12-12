@@ -28,9 +28,12 @@ export function UserLayoutComponent({ children }: { children: ReactNode }) {
                   <div className="font-bold">Richard</div>
                   <div className="text-[#333333] text-xs">0x7812345667</div>
                 </div>
-                <div className="flex items-center cursor-pointer rounded-full bg-[#C9CDD4] h-7 w-7 my-auto text-center">
+                <Link
+                  className="flex items-center cursor-pointer rounded-full bg-[#C9CDD4] h-7 w-7 my-auto text-center"
+                  href="/UserProfile/Edit"
+                >
                   <BiEdit color="white" size={20} className="m-auto" />
-                </div>
+                </Link>
               </div>
               <div className="mt-5 w-[180px] flex justify-between text-sm">
                 <div className="">

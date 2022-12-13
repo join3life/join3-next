@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons'
 import { message, Upload, Select } from 'antd'
 import type { UploadChangeParam } from 'antd/es/upload'
 import type { RcFile, UploadFile, UploadProps } from 'antd/es/upload/interface'
 import { useRouter } from 'next/router'
 import Back from '../../components/Back'
+import Collection from '../../contexts/Collection'
 
 const getBase64 = (img: RcFile, callback: (url: string) => void) => {
   const reader = new FileReader()
@@ -29,6 +30,7 @@ const CreateCollection = () => {
   const [imageUrl, setImageUrl] = useState<string>()
 
   const router = useRouter()
+  const { setCollectionName, setType, setDescription } = useContext(Collection)
 
   const handleChange: UploadProps['onChange'] = (
     info: UploadChangeParam<UploadFile>
@@ -54,7 +56,7 @@ const CreateCollection = () => {
   )
 
   const handleChangeSelect = (value: string) => {
-    console.log(`selected ${value}`)
+    setType!(value)
   }
 
   return (
@@ -76,6 +78,7 @@ const CreateCollection = () => {
             <input
               type="text"
               className="input input-bordered h-8 w-full max-w-xs"
+              onChange={e => setCollectionName!(e.target.value)}
             />
           </div>
           <div className="mt-[38px]">
@@ -113,7 +116,10 @@ const CreateCollection = () => {
           </div>
           <div className="mt-[38px]">
             <div className="text-[30px] font-bold">Collection Description</div>
-            <textarea className="textarea textarea-bordered h-8 w-full max-w-xs" />
+            <textarea
+              className="textarea textarea-bordered h-8 w-full max-w-xs"
+              onChange={e => setDescription!(e.target.value)}
+            />
           </div>
         </div>
         <div className="mt-[100px]">

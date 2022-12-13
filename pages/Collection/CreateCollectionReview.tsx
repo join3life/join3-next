@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons'
 import { message, Upload, Select } from 'antd'
 import type { UploadChangeParam } from 'antd/es/upload'
 import type { RcFile, UploadFile, UploadProps } from 'antd/es/upload/interface'
 import { useRouter } from 'next/router'
 import Back from '../../components/Back'
+import Collection from '../../contexts/Collection'
 
 const getBase64 = (img: RcFile, callback: (url: string) => void) => {
   const reader = new FileReader()
@@ -29,6 +30,7 @@ const CreateCollection = () => {
   const [imageUrl, setImageUrl] = useState<string>()
 
   const router = useRouter()
+  const { collectionName, type, description } = useContext(Collection)
 
   const handleChange: UploadProps['onChange'] = (
     info: UploadChangeParam<UploadFile>
@@ -64,61 +66,19 @@ const CreateCollection = () => {
         <div className="text-[50px] font-bold">Review</div>
         <div></div>
       </div>
-      <div className="text-[#747474]">Step2</div>
-      <div className="text-[#747474] w-[700px]">
-        Please fill in the collection name and description, and select the type.
-        The name and type of the collection cannot be changed after creation
-      </div>
       <div className="flex gap-20 ml-[182px]">
         <div>
           <div className="mt-16">
-            <div className="text-[30px] font-bold">Traits</div>
-            <input
-              type="text"
-              className="input input-bordered h-8 w-full max-w-xs"
-            />
+            <div className="text-[30px] font-bold">Collection Name</div>
+            <div className="text-[#747474] text-[25px]">{collectionName}</div>
           </div>
           <div className="mt-[38px]">
             <div className="text-[30px] font-bold">Type</div>
-            <Select
-              defaultValue="Skill"
-              style={{ width: 320 }}
-              onChange={handleChangeSelect}
-              options={[
-                {
-                  value: 'Skill',
-                  label: 'Skill'
-                },
-                {
-                  value: 'Project',
-                  label: 'Project'
-                },
-                {
-                  value: 'Event',
-                  label: 'Event'
-                },
-                {
-                  value: 'Role',
-                  label: 'Role'
-                }
-              ]}
-            />
+            <div className="text-[#747474] text-[25px]">{type}</div>
           </div>
           <div className="mt-[38px]">
-            <div className="text-[30px] font-bold">Amount limit</div>
-            <input
-              type="text"
-              placeholder="Default is unlimited"
-              className="input input-bordered h-8 w-full max-w-xs"
-            />
-          </div>
-          <div className="mt-[38px]">
-            <div className="text-[30px] font-bold"> Duration limit (day) </div>
-            <input
-              type="text"
-              placeholder="Default is unlimited"
-              className="input input-bordered h-8 w-full max-w-xs"
-            />
+            <div className="text-[30px] font-bold">Description</div>
+            <div className="text-[#747474] text-[25px]">{description}</div>
           </div>
         </div>
         <div className="mt-[100px]">
@@ -141,7 +101,7 @@ const CreateCollection = () => {
       </div>
       <div className="f-c-c mt-4">
         <div className="btn" onClick={() => router.push('')}>
-          Continue
+          Create
         </div>
       </div>
     </div>

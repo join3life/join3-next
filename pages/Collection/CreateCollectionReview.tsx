@@ -87,7 +87,10 @@ const CreateCollection = () => {
         </div>
       </div>
       <div className="f-c-c mt-4">
-        <div className="btn" onClick={() => router.push('')}>
+        <div
+          className="btn"
+          onClick={() => router.push('/Collection/Successful')}
+        >
           Create
         </div>
       </div>

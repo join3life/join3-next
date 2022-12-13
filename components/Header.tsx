@@ -1,9 +1,13 @@
+import { useRouter } from 'next/router'
 import { AiFillGift } from 'react-icons/ai'
 
 const Header = () => {
+  const router = useRouter()
   return (
     <div className="border-b h-[60px] bg-[#C9CDD4] flex justify-between items-center">
-      <div>LOGO</div>
+      <div className="cp" onClick={() => router.push('/')}>
+        LOGO
+      </div>
       <div className="flex items-center gap-2">
         <div className="indicator cursor-pointer">
           <span className="indicator-item badge badge-secondary h-[8px] w-[8px] pl-0 pr-0 top-1 right-1"></span>

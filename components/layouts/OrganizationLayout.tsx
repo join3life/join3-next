@@ -46,7 +46,9 @@ export function OrgLayoutComponent({ children }: { children: ReactNode }) {
               tabIndex={0}
               className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
             >
-              <li onClick={() => router.push('/Collection/CreateCollection')}>
+              <li
+                onClick={() => router.push('/Collection/CreateCollectionStep1')}
+              >
                 <a>Manage collection</a>
               </li>
               <li>

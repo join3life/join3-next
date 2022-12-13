@@ -80,23 +80,10 @@ const CreateCollection = () => {
             <div className="text-[30px] font-bold">Description</div>
             <div className="text-[#747474] text-[25px]">{description}</div>
           </div>
-        </div>
-        <div className="mt-[100px]">
-          <Upload
-            name="avatar"
-            listType="picture-card"
-            className="avatar-uploader w-20"
-            showUploadList={false}
-            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-            beforeUpload={beforeUpload}
-            onChange={handleChange}
-          >
-            {imageUrl ? (
-              <img src={imageUrl} alt="avatar" style={{ width: '100%' }} />
-            ) : (
-              uploadButton
-            )}
-          </Upload>
+          <div className="mt-[38px]">
+            <div className="text-[30px] font-bold">Traits</div>
+            <div className="text-[#747474] text-[25px]">{description}</div>
+          </div>
         </div>
       </div>
       <div className="f-c-c mt-4">

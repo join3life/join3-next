@@ -1,9 +1,9 @@
 import Image from "next/image";
 import { useEffect } from "react";
 import { useConnect, useAccount } from "wagmi";
-import  Button  from "../Button";
+import Button from "../Button";
 import { MdOutlineAccountBalanceWallet } from "react-icons/md";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 
 interface Props {
   open: boolean;
@@ -13,13 +13,24 @@ interface Props {
 export default function WalletOptionsModal(props: Props) {
   const { open, setOpen } = props;
 
-  const { connectors, isLoading: connectDataLoading, error , connect} =useConnect();
+  const {
+    connectors,
+    isLoading: connectDataLoading,
+    error,
+    connect,
+  } = useConnect();
   const { isConnected } = useAccount();
+  console.log(isConnected);
 
   const { push } = useRouter();
+
+  const close = () => {
+    setOpen(false);
+    push("/UserProfile");
+  };
+
   useEffect(() => {
-    isConnected && setOpen(false);
-    push('/UserProfile')
+    isConnected && close();
   }, [isConnected, setOpen]);
 
   return open ? (
@@ -33,13 +44,13 @@ export default function WalletOptionsModal(props: Props) {
                 Choose a Wallet
               </h3>
             </div>
-            {connectors.slice(0,-1).map((connector) => (
+            {connectors.slice(0, -1).map((connector) => (
               <div key={connector.id} className="mb-2 ml-2 mr-2 w-80">
                 <Button
                   loading={connectDataLoading}
                   width={80}
                   disabled={!connector.ready}
-                  onClick={() => connect({connector})}
+                  onClick={() => connect({ connector })}
                 >
                   <>
                     <div className="mr-3">
@@ -50,7 +61,9 @@ export default function WalletOptionsModal(props: Props) {
                         width={32}
                       />
                     </div>
-                    {`${connector.name}${!connector.ready ? " (unsupported)" : ""}`}
+                    {`${connector.name}${
+                      !connector.ready ? " (unsupported)" : ""
+                    }`}
                   </>
                 </Button>
               </div>

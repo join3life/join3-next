@@ -20,11 +20,17 @@ export default function WalletOptionsModal(props: Props) {
     connect
   } = useConnect()
   const { isConnected } = useAccount()
+  console.log(isConnected)
 
   const { push } = useRouter()
+
+  const close = () => {
+    setOpen(false)
+    push('/UserProfile')
+  }
+
   useEffect(() => {
-    isConnected && setOpen(false)
-    push('/UserProfile/Feed')
+    isConnected && close()
   }, [isConnected, setOpen])
 
   return open ? (

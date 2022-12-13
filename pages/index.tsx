@@ -1,14 +1,14 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Link from 'next/link'
+import type { NextPage } from "next";
+import Head from "next/head";
+import Link from "next/link";
 
-import { useEvmNativeBalance } from '@moralisweb3/next'
-import WalletOptionsModal from '../components/WalletOptionsModal'
-import { useState } from 'react'
+import { useEvmNativeBalance } from "@moralisweb3/next";
+import WalletOptionsModal from "../components/WalletOptionsModal";
+import { useState } from "react";
 
 const Home: NextPage = () => {
-  const address = '0xc14B8187368738532c71318cD77e7e28Ed9d53d3'
-  const { data: nativeBalance } = useEvmNativeBalance({ address })
+  const address = "0xc14B8187368738532c71318cD77e7e28Ed9d53d3";
+  const { data: nativeBalance } = useEvmNativeBalance({ address });
   //connect wallet and live in data
   const [showWalletOptions, setShowWalletOptions] = useState(false)
 
@@ -45,7 +45,7 @@ const Home: NextPage = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

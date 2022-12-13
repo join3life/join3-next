@@ -5,9 +5,12 @@ import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai'
 const Projects: NextPageWithLayout = () => {
   return (
     <div className="flex flex-wrap gap-12 mt-8">
-      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(() => {
+      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(item => {
         return (
-          <div className="w-[200px] h-[240px] group rounded-xl overflow-clip cursor-pointer hover:shadow-2xl transition duration-300">
+          <div
+            key={item}
+            className="w-[200px] h-[240px] group rounded-xl overflow-clip cursor-pointer hover:shadow-2xl transition duration-300"
+          >
             <div className="w-full h-[160px] bg-[#C9CDD4] relative">
               <div className="absolute top-1 right-2 hidden group-hover:block">
                 <label className="swap">

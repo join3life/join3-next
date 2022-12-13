@@ -4,9 +4,12 @@ import { UserLayout } from '../../components/layouts'
 const Feed: NextPageWithLayout = () => {
   return (
     <div className="flex flex-col">
-      {[1, 2, 3].map(() => {
+      {[1, 2, 3].map(item => {
         return (
-          <div className="w-[700px] h-[180px] mt-8 bg-[#F5F5F5] rounded-xl p-6">
+          <div
+            key={item}
+            className="w-[700px] h-[180px] mt-8 bg-[#F5F5F5] rounded-xl p-6"
+          >
             <div className="flex justify-between">
               <div>
                 PEZ got <span className="font-bold">CN MetAverse</span>

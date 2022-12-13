@@ -1,15 +1,27 @@
 import Link from 'next/link'
 import { ReactNode } from 'react'
 import { BiEdit } from 'react-icons/bi'
-import { FaChevronCircleRight, FaDiscord } from 'react-icons/fa'
+import { FaChevronCircleRight, FaDiscord, FaRegCopy } from 'react-icons/fa'
 import { AiFillTwitterCircle, AiFillGithub } from 'react-icons/ai'
 import { useRouter } from 'next/router'
+import { useAccount } from 'wagmi'
+import { message } from 'antd'
 
 /**
  * @package
  */
 export function UserLayoutComponent({ children }: { children: ReactNode }) {
   const router = useRouter()
+  const { address } = useAccount()
+  const showAddress = address
+    ? address.slice(0, 5) + '...' + address?.slice(-4)
+    : 'please connect wallet'
+
+  const CopyAddress = () => {
+    navigator.clipboard.writeText(address!)
+    message.success('Copied')
+  }
+
   //在这里写slider bar和header的layout布局 组件抽离再封装
   return (
     <>
@@ -25,7 +37,14 @@ export function UserLayoutComponent({ children }: { children: ReactNode }) {
                 </div>
                 <div className="w-[150px] my-auto">
                   <div className="font-bold">Richard</div>
-                  <div className="text-[#333333] text-xs">0x7812345667</div>
+                  <div className="text-[#333333] text-xs flex gap-2">
+                    {showAddress}
+                    {address && (
+                      <div className="cp" onClick={CopyAddress}>
+                        <FaRegCopy size={16} />
+                      </div>
+                    )}
+                  </div>
                 </div>
                 <Link
                   className="flex items-center cursor-pointer rounded-full bg-[#C9CDD4] h-7 w-7 my-auto text-center"
@@ -72,9 +91,12 @@ export function UserLayoutComponent({ children }: { children: ReactNode }) {
                 </div>
               </div>
               <div className="mt-5">
-                {[0, 1, 2, 3, 4].map(() => {
+                {[0, 1, 2, 3, 4].map(item => {
                   return (
-                    <div className="flex gap-3 items-center mt-[18px]">
+                    <div
+                      key={item}
+                      className="flex gap-3 items-center mt-[18px]"
+                    >
                       <div className="w-[44px] h-[44px] rounded-[50%] overflow-clip cursor-pointer">
                         <img src="https://placeimg.com/192/192/people" alt="" />
                       </div>

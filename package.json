@@ -6,15 +6,18 @@
     "start": "next start"
   },
   "dependencies": {
+    "@moralisweb3/common-evm-utils": "^2.9.0",
     "@moralisweb3/next": "^2.8.2",
     "daisyui": "^2.42.1",
     "ethers": "^5.7.2",
-    "moralis": "^2.8.2",
+    "moralis": "^2.9.0",
     "next": "latest",
     "next-auth": "^4.18.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.7.1",
+    "react-moralis": "^1.4.2",
+    "use-debounce": "^9.0.2",
     "wagmi": "^0.9.0"
   },
   "devDependencies": {

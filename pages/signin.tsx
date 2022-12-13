@@ -4,7 +4,7 @@ import { useAccount, useConnect, useSignMessage, useDisconnect } from 'wagmi';
 import { useRouter } from 'next/router';
 import { useAuthRequestChallengeEvm } from '@moralisweb3/next';
 
-function SignIn() {
+ function SignIn() {
     const { connectAsync } = useConnect();
     const { disconnectAsync } = useDisconnect();
     const { isConnected } = useAccount();

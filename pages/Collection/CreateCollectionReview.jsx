@@ -1,19 +1,20 @@
 import { useContext, useState } from 'react'
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons'
 import { message, Upload, Select } from 'antd'
-import type { UploadChangeParam } from 'antd/es/upload'
-import type { RcFile, UploadFile, UploadProps } from 'antd/es/upload/interface'
 import { useRouter } from 'next/router'
 import Back from '../../components/Back'
 import Collection from '../../contexts/Collection'
+import { ethers } from "ethers";
+import { contractABI, contractAddress } from "../../utils/constants";
 
-const getBase64 = (img: RcFile, callback: (url: string) => void) => {
+
+const getBase64 = (img, callback) => {
   const reader = new FileReader()
-  reader.addEventListener('load', () => callback(reader.result as string))
+  reader.addEventListener('load', () => callback(reader.result))
   reader.readAsDataURL(img)
 }
 
-const beforeUpload = (file: RcFile) => {
+const beforeUpload = (file) => {
   const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png'
   if (!isJpgOrPng) {
     message.error('You can only upload JPG/PNG file!')
@@ -27,13 +28,13 @@ const beforeUpload = (file: RcFile) => {
 
 const CreateCollection = () => {
   const [loading, setLoading] = useState(false)
-  const [imageUrl, setImageUrl] = useState<string>()
+  const [imageUrl, setImageUrl] = useState()
 
   const router = useRouter()
   const { collectionName, type, description } = useContext(Collection)
 
-  const handleChange: UploadProps['onChange'] = (
-    info: UploadChangeParam<UploadFile>
+  const handleChange= (
+    info
   ) => {
     if (info.file.status === 'uploading') {
       setLoading(true)
@@ -41,7 +42,7 @@ const CreateCollection = () => {
     }
     if (info.file.status === 'done') {
       // Get this url from response in real world.
-      getBase64(info.file.originFileObj as RcFile, url => {
+      getBase64(info.file.originFileObj, url => {
         setLoading(false)
         setImageUrl(url)
       })
@@ -55,8 +56,31 @@ const CreateCollection = () => {
     </div>
   )
 
-  const handleChangeSelect = (value: string) => {
+  const handleChangeSelect = (value) => {
     console.log(`selected ${value}`)
+  }
+  
+  const successful = async ()=>{
+    try {
+      const { ethereum } = window;
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const contract = new ethers.Contract(
+          contractAddress, contractABI,
+          signer
+        );
+        const res = await contract.initCollection(
+          "Join3",  // Collection name
+          "projects",  // 给合约加了 _type 但是目前获取不到，不知道有何用
+          "symbol"  // ERC721 的 symbol，用户可以不填这个，没啥用
+        )
+        console.log('init_contract status', res)
+      }
+      router.push('/Collection/Successful')
+    } catch (err) {
+      console.log('error: ', err)
+    }     
   }
 
   return (
@@ -89,7 +113,7 @@ const CreateCollection = () => {
       <div className="f-c-c mt-4">
         <div
           className="btn"
-          onClick={() => router.push('/Collection/Successful')}
+          onClick={() => successful()}
         >
           Create
         </div>

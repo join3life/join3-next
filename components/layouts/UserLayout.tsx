@@ -10,7 +10,6 @@ import { useRouter } from 'next/router'
  */
 export function UserLayoutComponent({ children }: { children: ReactNode }) {
   const router = useRouter()
-  console.log(router)
   //在这里写slider bar和header的layout布局 组件抽离再封装
   return (
     <>

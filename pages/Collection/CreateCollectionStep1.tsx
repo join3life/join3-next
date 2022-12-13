@@ -30,7 +30,16 @@ const CreateCollection = () => {
   const [imageUrl, setImageUrl] = useState<string>()
 
   const router = useRouter()
-  const { setCollectionName, setType, setDescription } = useContext(Collection)
+  const {
+    collectionName,
+    setCollectionName,
+    type,
+    setType,
+    description,
+    setDescription,
+    projectName,
+    setProjectName
+  } = useContext(Collection)
 
   const handleChange: UploadProps['onChange'] = (
     info: UploadChangeParam<UploadFile>
@@ -57,6 +66,16 @@ const CreateCollection = () => {
 
   const handleChangeSelect = (value: string) => {
     setType!(value)
+  }
+
+  const jumpToStep2 = () => {
+    if (collectionName && description && type !== 'Project') {
+      router.push('/Collection/CreateCollectionStep2')
+    } else if (collectionName && description && projectName) {
+      router.push('/Collection/CreateCollectionStep2')
+    } else {
+      message.error('Please fill in the information')
+    }
   }
 
   return (
@@ -107,13 +126,17 @@ const CreateCollection = () => {
               ]}
             />
           </div>
-          <div className="mt-[38px]">
-            <div className="text-[30px] font-bold">Project name</div>
-            <input
-              type="text"
-              className="input input-bordered h-8 w-full max-w-xs"
-            />
-          </div>
+          {type === 'Project' && (
+            <div className="mt-[38px]">
+              <div className="text-[30px] font-bold">Project name</div>
+              <input
+                type="text"
+                className="input input-bordered h-8 w-full max-w-xs"
+                onChange={e => setProjectName!(e.target.value)}
+              />
+            </div>
+          )}
+
           <div className="mt-[38px]">
             <div className="text-[30px] font-bold">Collection Description</div>
             <textarea
@@ -141,10 +164,7 @@ const CreateCollection = () => {
         </div>
       </div>
       <div className="f-c-c mt-4">
-        <div
-          className="btn"
-          onClick={() => router.push('/Collection/CreateCollectionStep2')}
-        >
+        <div className="btn" onClick={() => jumpToStep2()}>
           Continue
         </div>
       </div>

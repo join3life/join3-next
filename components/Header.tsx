@@ -5,7 +5,7 @@ const Header = () => {
   const router = useRouter()
   return (
     <div className="border-b h-[60px] bg-[#C9CDD4] flex justify-between items-center">
-      <div className="cp" onClick={() => router.push('/')}>
+      <div className="cp ml-4" onClick={() => router.push('/')}>
         LOGO
       </div>
       <div className="flex items-center gap-2">

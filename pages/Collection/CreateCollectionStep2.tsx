@@ -86,8 +86,9 @@ const CreateCollection = () => {
       </div>
       <div className="text-[#747474]">Step2</div>
       <div className="text-[#747474] w-[700px]">
-        Please fill in the collection name and description, and select the type.
-        The name and type of the collection cannot be changed after creation
+        Please set the attributes of the collection to facilitate the
+        distribution of pv2 , you can also add more attributes in distributing
+        page
       </div>
       <div className="ml-[182px]">
         <div>

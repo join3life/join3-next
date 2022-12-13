@@ -7,6 +7,8 @@ interface CollectionProps {
   setType: (type: string) => void
   description: string
   setDescription: (description: string) => void
+  projectName: string
+  setProjectName: (name: string) => void
 }
 
 export default createContext({} as Partial<CollectionProps>)

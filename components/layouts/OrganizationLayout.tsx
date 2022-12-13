@@ -20,7 +20,8 @@ export function OrgLayoutComponent({ children }: { children: ReactNode }) {
           <IoPersonCircle size={60} />
         </div>
       </div>
-      <div className="flex justify-center gap-6">
+      <div className="flex gap-6">
+        <div className="basis-[48%]"></div>
         <div className="">Richard</div>
         <div className="">201 follower</div>
         <div className="flex gap-6">

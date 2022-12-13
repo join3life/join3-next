@@ -12,9 +12,9 @@ import { CoinbaseWalletConnector } from 'wagmi/connectors/coinbaseWallet'
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
 import { InjectedConnector } from 'wagmi/connectors/injected'
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
- 
-const {chains, provider, webSocketProvider } = configureChains(
-  [mainnet,polygon],
+
+const { chains, provider, webSocketProvider } = configureChains(
+  [mainnet, polygon],
   [publicProvider()]
 )
 
@@ -26,25 +26,25 @@ const client = createClient({
     new CoinbaseWalletConnector({
       chains,
       options: {
-        appName: 'wagmi',
-      },
+        appName: 'wagmi'
+      }
     }),
     new WalletConnectConnector({
       chains,
       options: {
-        qrcode: true,
-      },
+        qrcode: true
+      }
     }),
     new InjectedConnector({
       chains,
       options: {
         name: 'Injected',
-        shimDisconnect: true,
-      },
-    }),
+        shimDisconnect: true
+      }
+    })
   ],
   provider,
-  webSocketProvider,
+  webSocketProvider
 })
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
@@ -61,6 +61,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const [collectionName, setCollectionName] = useState('')
   const [type, setType] = useState('Skill')
   const [description, setDescription] = useState('')
+  const [projectName, setProjectName] = useState('')
 
   const collectionContextValue = {
     collectionName,
@@ -68,7 +69,9 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
     type,
     setType,
     description,
-    setDescription
+    setDescription,
+    projectName,
+    setProjectName
   }
 
   return (

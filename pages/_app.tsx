@@ -1,22 +1,22 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
-import { createClient, configureChains, WagmiConfig, mainnet } from 'wagmi'
-import { polygon, optimism } from 'wagmi/chains'
-import { publicProvider } from 'wagmi/providers/public'
-import { SessionProvider } from 'next-auth/react'
-import Header from '../components/Header'
-import { ReactElement, ReactNode, useState } from 'react'
-import { NextPage } from 'next'
-import Collection from '../contexts/Collection'
-import { CoinbaseWalletConnector } from 'wagmi/connectors/coinbaseWallet'
-import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
-import { InjectedConnector } from 'wagmi/connectors/injected'
-import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
+import "../styles/globals.css";
+import type { AppProps } from "next/app";
+import { createClient, configureChains, WagmiConfig, mainnet } from "wagmi";
+import { polygon, optimism } from "wagmi/chains";
+import { publicProvider } from "wagmi/providers/public";
+import { SessionProvider } from "next-auth/react";
+import Header from "../components/Header";
+import { ReactElement, ReactNode, useState } from "react";
+import { NextPage } from "next";
+import Collection from "../contexts/Collection";
+import { CoinbaseWalletConnector } from "wagmi/connectors/coinbaseWallet";
+import { WalletConnectConnector } from "wagmi/connectors/walletConnect";
+import { InjectedConnector } from "wagmi/connectors/injected";
+import { MetaMaskConnector } from "wagmi/connectors/metaMask";
 
 const { chains, provider, webSocketProvider } = configureChains(
   [mainnet, polygon],
   [publicProvider()]
-)
+);
 
 // Set up client
 const client = createClient({
@@ -26,42 +26,42 @@ const client = createClient({
     new CoinbaseWalletConnector({
       chains,
       options: {
-        appName: 'wagmi'
-      }
+        appName: "wagmi",
+      },
     }),
     new WalletConnectConnector({
       chains,
       options: {
-        qrcode: true
-      }
+        qrcode: true,
+      },
     }),
     new InjectedConnector({
       chains,
       options: {
-        name: 'Injected',
-        shimDisconnect: true
-      }
-    })
+        name: "Injected",
+        shimDisconnect: true,
+      },
+    }),
   ],
   provider,
-  webSocketProvider
-})
+  webSocketProvider,
+});
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
-  getLayout?: (page: ReactElement) => ReactNode
-}
+  getLayout?: (page: ReactElement) => ReactNode;
+};
 
 type AppPropsWithLayout = AppProps & {
-  Component: NextPageWithLayout
-}
+  Component: NextPageWithLayout;
+};
 
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
-  const getLayout = Component.getLayout ?? (page => page)
+  const getLayout = Component.getLayout ?? ((page) => page);
 
-  const [collectionName, setCollectionName] = useState('')
-  const [type, setType] = useState('Skill')
-  const [description, setDescription] = useState('')
-  const [projectName, setProjectName] = useState('')
+  const [collectionName, setCollectionName] = useState("");
+  const [type, setType] = useState("Skill");
+  const [description, setDescription] = useState("");
+  const [projectName, setProjectName] = useState("");
 
   const collectionContextValue = {
     collectionName,
@@ -71,19 +71,18 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
     description,
     setDescription,
     projectName,
-    setProjectName
-  }
+    setProjectName,
+  };
 
   return (
     <WagmiConfig client={client}>
       <SessionProvider session={pageProps.session} refetchInterval={0}>
         <Collection.Provider value={collectionContextValue}>
-          <Header />
           {getLayout(<Component {...pageProps} />)}
         </Collection.Provider>
       </SessionProvider>
     </WagmiConfig>
-  )
+  );
 }
 
-export default MyApp
+export default MyApp;

@@ -1,30 +1,45 @@
-import Link from 'next/link'
-import { ReactNode } from 'react'
-import { BiEdit } from 'react-icons/bi'
-import { FaChevronCircleRight, FaDiscord, FaRegCopy } from 'react-icons/fa'
-import { AiFillTwitterCircle, AiFillGithub } from 'react-icons/ai'
-import { useRouter } from 'next/router'
-import { useAccount } from 'wagmi'
-import { message } from 'antd'
+import Link from "next/link";
+import { ReactNode, useState } from "react";
+import { BiEdit } from "react-icons/bi";
+import { FaChevronCircleRight, FaDiscord, FaRegCopy } from "react-icons/fa";
+import { AiFillTwitterCircle, AiFillGithub } from "react-icons/ai";
+import { useRouter } from "next/router";
+import Header from "./Headers";
+import { useAccount } from "wagmi";
+import { message } from "antd";
+/**
+ * @package
+ */
+export function Layout({ children }: { children: ReactNode }) {
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
+
+  return (
+    <>
+      <Header />
+      <main>{children}</main>
+    </>
+  );
+}
 
 /**
  * @package
  */
 export function UserLayoutComponent({ children }: { children: ReactNode }) {
-  const router = useRouter()
-  const { address } = useAccount()
+  const router = useRouter();
+  const { address } = useAccount();
   const showAddress = address
-    ? address.slice(0, 5) + '...' + address?.slice(-4)
-    : 'please connect wallet'
+    ? address.slice(0, 5) + "..." + address?.slice(-4)
+    : "please connect wallet";
 
   const CopyAddress = () => {
-    navigator.clipboard.writeText(address!)
-    message.success('Copied')
-  }
+    navigator.clipboard.writeText(address!);
+    message.success("Copied");
+  };
 
   //在这里写slider bar和header的layout布局 组件抽离再封装
   return (
     <>
+      <Header></Header>
       <div className="flex justify-center">
         <div className="w-[1100px] flex justify-between pt-14">
           <div className="flex flex-col h-[668px] justify-between">
@@ -91,7 +106,7 @@ export function UserLayoutComponent({ children }: { children: ReactNode }) {
                 </div>
               </div>
               <div className="mt-5">
-                {[0, 1, 2, 3, 4].map(item => {
+                {[0, 1, 2, 3, 4].map((item) => {
                   return (
                     <div
                       key={item}
@@ -102,7 +117,7 @@ export function UserLayoutComponent({ children }: { children: ReactNode }) {
                       </div>
                       <div className="cursor-pointer text-[#333]">DAO</div>
                     </div>
-                  )
+                  );
                 })}
               </div>
             </div>
@@ -111,9 +126,9 @@ export function UserLayoutComponent({ children }: { children: ReactNode }) {
             <div className="flex justify-evenly">
               <Link
                 className={
-                  router.pathname === '/UserProfile/Feed'
-                    ? 'btn w-[100px]'
-                    : 'btn w-[100px] bg-white text-black hover:text-white'
+                  router.pathname === "/UserProfile/Feed"
+                    ? "btn w-[100px]"
+                    : "btn w-[100px] bg-white text-black hover:text-white"
                 }
                 href="/UserProfile/Feed"
               >
@@ -121,9 +136,9 @@ export function UserLayoutComponent({ children }: { children: ReactNode }) {
               </Link>
               <Link
                 className={
-                  router.pathname === '/UserProfile/Projects'
-                    ? 'btn w-[100px]'
-                    : 'btn w-[100px] bg-white text-black hover:text-white'
+                  router.pathname === "/UserProfile/Projects"
+                    ? "btn w-[100px]"
+                    : "btn w-[100px] bg-white text-black hover:text-white"
                 }
                 href="/UserProfile/Projects"
               >
@@ -131,9 +146,9 @@ export function UserLayoutComponent({ children }: { children: ReactNode }) {
               </Link>
               <Link
                 className={
-                  router.pathname === '/UserProfile/Skills'
-                    ? 'btn w-[100px]'
-                    : 'btn w-[100px] bg-white text-black hover:text-white'
+                  router.pathname === "/UserProfile/Skills"
+                    ? "btn w-[100px]"
+                    : "btn w-[100px] bg-white text-black hover:text-white"
                 }
                 href="/UserProfile/Skills"
               >
@@ -141,9 +156,9 @@ export function UserLayoutComponent({ children }: { children: ReactNode }) {
               </Link>
               <Link
                 className={
-                  router.pathname === '/UserProfile/Interests'
-                    ? 'btn w-[100px]'
-                    : 'btn w-[100px] bg-white text-black hover:text-white'
+                  router.pathname === "/UserProfile/Interests"
+                    ? "btn w-[100px]"
+                    : "btn w-[100px] bg-white text-black hover:text-white"
                 }
                 href="/UserProfile/Interests"
               >
@@ -155,12 +170,12 @@ export function UserLayoutComponent({ children }: { children: ReactNode }) {
         </div>
       </div>
     </>
-  )
+  );
 }
 
 /**
  * @package
  */
 export function UserLayout(page: ReactNode): JSX.Element {
-  return <UserLayoutComponent>{page}</UserLayoutComponent>
+  return <UserLayoutComponent>{page}</UserLayoutComponent>;
 }

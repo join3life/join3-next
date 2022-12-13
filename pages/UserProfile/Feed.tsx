@@ -1,5 +1,5 @@
-import type { NextPageWithLayout } from '../_app'
-import { UserLayout } from '../../components/layouts'
+import type { NextPageWithLayout } from "../_app";
+import { UserLayout } from "../../components/layouts";
 
 const Feed: NextPageWithLayout = () => {
   return (
@@ -39,12 +39,12 @@ const Feed: NextPageWithLayout = () => {
               </div>
             </div>
           </div>
-        )
+        );
       })}
     </div>
-  )
-}
+  );
+};
 
-Feed.getLayout = UserLayout
+Feed.getLayout = UserLayout;
 
-export default Feed
+export default Feed;

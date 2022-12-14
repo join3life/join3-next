@@ -4,7 +4,6 @@ import { createClient, configureChains, WagmiConfig, mainnet } from "wagmi";
 import { polygon, optimism } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 import { SessionProvider } from "next-auth/react";
-import Header from "../components/Header";
 import { ReactElement, ReactNode, useState } from "react";
 import { NextPage } from "next";
 import Collection from "../contexts/Collection";

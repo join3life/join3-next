@@ -1,12 +1,6 @@
 import { useRouter } from "next/router";
 import { AiFillGift } from "react-icons/ai";
-import {
-  useAccount,
-  useConnect,
-  useDisconnect,
-  useEnsAvatar,
-  useEnsName,
-} from "wagmi";
+import { useDisconnect } from "wagmi";
 
 const Header = (props) => {
   const router = useRouter();

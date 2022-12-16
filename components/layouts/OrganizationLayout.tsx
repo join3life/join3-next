@@ -5,11 +5,14 @@ import { FiTwitter } from 'react-icons/fi'
 import { RxDiscordLogo } from 'react-icons/rx'
 import { useRouter } from 'next/router'
 
+import Header from './Headers'
+
 export function OrgLayoutComponent({ children }: { children: ReactNode }) {
   const router = useRouter()
 
   return (
     <>
+      <Header />
       <div className="relative pb-8">
         <img
           className="w-full h-[256px] object-cover object-center"
@@ -59,7 +62,35 @@ export function OrgLayoutComponent({ children }: { children: ReactNode }) {
           </div>
         </div>
       </div>
-      <div>{children}</div>
+      <div>
+        <div className="flex gap-10 border-b-2 pl-20 pb-4">
+          <div
+            className="cp"
+            onClick={() => router.push('/OrganizationProfile')}
+          >
+            <div className="h-2 w-2 rounded-full bg-black mt-2"></div>
+          </div>
+          <div
+            className="cp"
+            onClick={() => router.push('/OrganizationProfile/Member')}
+          >
+            Member
+          </div>
+          <div
+            className="cp"
+            onClick={() => router.push('/OrganizationProfile/Projects')}
+          >
+            Projects
+          </div>
+          <div
+            className="cp"
+            onClick={() => router.push('/OrganizationProfile/Event')}
+          >
+            Event
+          </div>
+        </div>
+        <div className="px-20">{children}</div>
+      </div>
     </>
   )
 }

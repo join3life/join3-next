@@ -65,31 +65,47 @@ export function OrgLayoutComponent({ children }: { children: ReactNode }) {
       <div>
         <div className="flex gap-10 border-b-2 pl-20 pb-4">
           <div
-            className="cp"
+            className={
+              router.pathname === '/OrganizationProfile'
+                ? 'cp border-b-4 border-[black] px-2 py-1'
+                : 'cp px-2 py-1'
+            }
             onClick={() => router.push('/OrganizationProfile')}
           >
             <div className="h-2 w-2 rounded-full bg-black mt-2"></div>
           </div>
           <div
-            className="cp"
+            className={
+              router.pathname === '/OrganizationProfile/Member'
+                ? 'cp border-b-4 border-[black]'
+                : 'cp'
+            }
             onClick={() => router.push('/OrganizationProfile/Member')}
           >
             Member
           </div>
           <div
-            className="cp"
+            className={
+              router.pathname === '/OrganizationProfile/Projects'
+                ? 'cp border-b-4 border-[black]'
+                : 'cp'
+            }
             onClick={() => router.push('/OrganizationProfile/Projects')}
           >
             Projects
           </div>
           <div
-            className="cp"
+            className={
+              router.pathname === '/OrganizationProfile/Event'
+                ? 'cp border-b-4 border-[black]'
+                : 'cp'
+            }
             onClick={() => router.push('/OrganizationProfile/Event')}
           >
             Event
           </div>
         </div>
-        <div className="px-20">{children}</div>
+        <div className="px-12 py-5">{children}</div>
       </div>
     </>
   )

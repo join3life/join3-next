@@ -30,8 +30,7 @@ const OrganizationProfile: NextPageWithLayout = () => {
         <div className="flex gap-8">
           {['Tom', 'Jerry', 'John', 'Doe', 'Jane', 'chares'].map(item => {
             return (
-              <div className="f-c-c gap-2 cp">
-                <FaUserCircle size={30} />
+              <div className="f-c-c cp w-[100px] h-[100px] rounded-lg bg-slate-200">
                 {item}
               </div>
             )

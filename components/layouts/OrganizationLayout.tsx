@@ -26,7 +26,7 @@ export function OrgLayoutComponent({ children }: { children: ReactNode }) {
       <div className="flex gap-6">
         <div className="basis-[48%]"></div>
         <div className="">Richard</div>
-        <div className="">201 follower</div>
+        <div className="font-[300]">201 follower</div>
         <div className="flex gap-6">
           <div className="cursor-pointer">
             <AiOutlineGlobal size={22} />

@@ -9,6 +9,7 @@ const OrganizationProfile: NextPageWithLayout = () => {
       <PreviewContainer
         title="Member"
         intro="Thirty people have been awarded skills certification badges"
+        more="/OrganizationProfile/Member"
       >
         <div className="flex gap-8">
           {['Tom', 'Jerry', 'John', 'Doe', 'Jane', 'chares'].map(item => {
@@ -24,6 +25,7 @@ const OrganizationProfile: NextPageWithLayout = () => {
       <PreviewContainer
         title="Events"
         intro="There are five event under way. You can participate in collecting the badge."
+        more="/OrganizationProfile/Event"
       >
         <div className="flex gap-8">
           {['Tom', 'Jerry', 'John', 'Doe', 'Jane', 'chares'].map(item => {
@@ -39,6 +41,7 @@ const OrganizationProfile: NextPageWithLayout = () => {
       <PreviewContainer
         title="Projects"
         intro="Four projects have been completed so far."
+        more="/OrganizationProfile/Projects"
       >
         <div className="flex gap-8">
           {['Tom', 'Jerry', 'John', 'Doe', 'Jane', 'chares'].map(item => {

@@ -1,17 +1,17 @@
-import { useRouter } from "next/router";
-import { AiFillGift } from "react-icons/ai";
-import { useDisconnect } from "wagmi";
+import { useRouter } from 'next/router'
+import { AiFillGift } from 'react-icons/ai'
+import { useDisconnect } from 'wagmi'
 
-const Header = (props) => {
-  const router = useRouter();
-  const { disconnect } = useDisconnect();
+const Header = props => {
+  const router = useRouter()
+  const { disconnect } = useDisconnect()
   const logout = () => {
-    disconnect();
-    router.push("/");
-  };
+    disconnect()
+    router.push('/')
+  }
   return (
     <div className="border-b h-[60px] bg-[#C9CDD4] flex justify-between items-center">
-      <div className="cp" onClick={() => router.push("/")}>
+      <div className="cp pl-4" onClick={() => router.push('/')}>
         LOGO
       </div>
       <div className="flex items-center gap-2">
@@ -40,7 +40,7 @@ const Header = (props) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

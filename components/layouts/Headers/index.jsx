@@ -1,17 +1,24 @@
-import { useRouter } from 'next/router'
-import { AiFillGift } from 'react-icons/ai'
-import { useDisconnect } from 'wagmi'
+import { useRouter } from "next/router";
+import { AiFillGift } from "react-icons/ai";
+import { useDisconnect, useAccount } from "wagmi";
 
-const Header = props => {
-  const router = useRouter()
-  const { disconnect } = useDisconnect()
+const Header = (props) => {
+  const router = useRouter();
+  const { disconnect } = useDisconnect();
+  const { address, isConnected, connector } = useAccount();
+
+  const islogin = isConnected
+    ? address?.slice(0, 5) + "..." + address?.slice(-4)
+    : "connect wallet";
+
+  console.log(isConnected);
   const logout = () => {
-    disconnect()
-    router.push('/')
-  }
+    disconnect();
+    router.push("/");
+  };
   return (
     <div className="border-b h-[60px] bg-[#C9CDD4] flex justify-between items-center">
-      <div className="cp pl-4" onClick={() => router.push('/')}>
+      <div className="cp pl-4" onClick={() => router.push("/")}>
         LOGO
       </div>
       <div className="flex items-center gap-2">
@@ -20,8 +27,14 @@ const Header = props => {
           <AiFillGift size={30} />
         </div>
         <div className="dropdown dropdown-end mr-2">
-          <label tabIndex={0} className="btn h-[20px] w-[150px]">
-            Click
+          <label
+            tabIndex={0}
+            className="btn h-[20px] w-[150px]"
+            onClick={() => {
+              if (!isConnected) router.push("/");
+            }}
+          >
+            {islogin}
           </label>
           <ul
             tabIndex={0}
@@ -40,7 +53,7 @@ const Header = props => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

@@ -26,9 +26,10 @@ export function Layout({ children }: { children: ReactNode }) {
  */
 export function UserLayoutComponent({ children }: { children: ReactNode }) {
   const router = useRouter();
-  const { address } = useAccount();
-  const showAddress = address
-    ? address.slice(0, 5) + "..." + address?.slice(-4)
+  const { address, isConnected, connector } = useAccount();
+  console.log(address, isConnected, connector);
+  const showAddress = isConnected
+    ? address?.slice(0, 5) + "..." + address?.slice(-4)
     : "please connect wallet";
 
   const CopyAddress = () => {

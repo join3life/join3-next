@@ -1,10 +1,10 @@
-import type { NextPage } from "next";
-import Head from "next/head";
-import Link from "next/link";
+import type { NextPage } from 'next'
+import Head from 'next/head'
+import Link from 'next/link'
 
-import { useEvmNativeBalance } from "@moralisweb3/next";
-import WalletOptionsModal from "../components/WalletOptionsModal";
-import { useState } from "react";
+import { useEvmNativeBalance } from '@moralisweb3/next'
+import WalletOptionsModal from '../components/WalletOptionsModal'
+import { useState } from 'react'
 
 const Home: NextPage = () => {
   //connect wallet and live in data
@@ -39,7 +39,7 @@ const Home: NextPage = () => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

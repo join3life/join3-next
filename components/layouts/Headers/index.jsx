@@ -1,24 +1,24 @@
-import { useRouter } from "next/router";
-import { AiFillGift } from "react-icons/ai";
-import { useDisconnect, useAccount } from "wagmi";
+import { useRouter } from 'next/router'
+import { AiFillGift } from 'react-icons/ai'
+import { useDisconnect, useAccount } from 'wagmi'
 
-const Header = (props) => {
-  const router = useRouter();
-  const { disconnect } = useDisconnect();
-  const { address, isConnected, connector } = useAccount();
+const Header = props => {
+  const router = useRouter()
+  const { disconnect } = useDisconnect()
+  const { address, isConnected, connector } = useAccount()
 
-  const islogin = isConnected
-    ? address?.slice(0, 5) + "..." + address?.slice(-4)
-    : "connect wallet";
+  const isLogin = isConnected
+    ? address?.slice(0, 5) + '...' + address?.slice(-4)
+    : 'connect wallet'
 
-  console.log(isConnected);
+  console.log(isConnected)
   const logout = () => {
-    disconnect();
-    router.push("/");
-  };
+    disconnect()
+    router.push('/')
+  }
   return (
     <div className="border-b h-[60px] bg-[#C9CDD4] flex justify-between items-center">
-      <div className="cp pl-4" onClick={() => router.push("/")}>
+      <div className="cp pl-4" onClick={() => router.push('/')}>
         LOGO
       </div>
       <div className="flex items-center gap-2">
@@ -31,17 +31,17 @@ const Header = (props) => {
             tabIndex={0}
             className="btn h-[20px] w-[150px]"
             onClick={() => {
-              if (!isConnected) router.push("/");
+              if (!isConnected) router.push('/')
             }}
           >
-            {islogin}
+            {isLogin}
           </label>
           <ul
             tabIndex={0}
             className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
           >
-            <li>
-              <a>Item 1</a>
+            <li onClick={() => router.push('/OrganizationProfile/Create')}>
+              <a>New Organization</a>
             </li>
             <li>
               <a>Item 2</a>
@@ -53,7 +53,7 @@ const Header = (props) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

@@ -5,10 +5,10 @@ module.exports = {
   async redirects() {
     return [
       {
-        source: '/UserProfile',
-        destination: '/UserProfile/Feed',
-        permanent: true
-      }
-    ]
-  }
-}
+        source: "/UserProfile",
+        destination: "/UserProfile/Feed",
+        permanent: true,
+      },
+    ];
+  },
+};

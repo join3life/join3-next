@@ -11,6 +11,7 @@ import { CoinbaseWalletConnector } from "wagmi/connectors/coinbaseWallet";
 import { WalletConnectConnector } from "wagmi/connectors/walletConnect";
 import { InjectedConnector } from "wagmi/connectors/injected";
 import { MetaMaskConnector } from "wagmi/connectors/metaMask";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -19,6 +20,8 @@ export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
+
+const queryClient = new QueryClient();
 
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const { chains, provider, webSocketProvider } = configureChains(
@@ -74,13 +77,15 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   };
 
   return (
-    <WagmiConfig client={client}>
-      <SessionProvider session={pageProps.session} refetchInterval={0}>
-        <Collection.Provider value={collectionContextValue}>
-          {getLayout(<Component {...pageProps} />)}
-        </Collection.Provider>
-      </SessionProvider>
-    </WagmiConfig>
+    <QueryClientProvider client={queryClient}>
+      <WagmiConfig client={client}>
+        <SessionProvider session={pageProps.session} refetchInterval={0}>
+          <Collection.Provider value={collectionContextValue}>
+            {getLayout(<Component {...pageProps} />)}
+          </Collection.Provider>
+        </SessionProvider>
+      </WagmiConfig>
+    </QueryClientProvider>
   );
 }
 

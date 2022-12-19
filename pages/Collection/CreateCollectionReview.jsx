@@ -68,20 +68,22 @@ const CreateCollection = () => {
           contractABI,
           signer
         );
-        // const res = await contract.initCollection(
-        //   "Join3", // Collection name
-        //   "projects", // 给合约加了 _type 但是目前获取不到，不知道有何用
-        //   "symbol" // ERC721 的 symbol，用户可以不填这个，没啥用
-        // );
-        contract.getColAddressByName("Join3").then((res) => {
-          console.log(res);
+        const res = await contract.initCollection(
+          collectionName,
+          type,
+          description
+        );
+        const address = await contract.getColAddressByName("Join3");
+        //todo 获取org的名字，获取type类型
+        fetch("http://47.99.143.186/api/org", {
+          method: "PUT",
+          body: {
+            name: "seedao",
+            projects: { name: collectionName, address: address },
+          },
         });
-        // console.log();
-        console.log("init_contract status", res);
+        console.log("init_contract status", type, res, address);
       }
-      // const res = await axios.put(" http://47.99.143.186/api/org", {
-      //   hello: "world",
-      // });
       router.push("/Collection/Successful");
     } catch (err) {
       console.log("error: ", err);

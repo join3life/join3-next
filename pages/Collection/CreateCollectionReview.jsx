@@ -6,6 +6,7 @@ import Back from "../../components/Back";
 import Collection from "../../contexts/Collection";
 import { ethers } from "ethers";
 import { contractABI, contractAddress } from "../../utils/constants";
+import Organization from "../../contexts/Organization";
 
 const getBase64 = (img, callback) => {
   const reader = new FileReader();
@@ -26,6 +27,8 @@ const beforeUpload = (file) => {
 };
 
 const CreateCollection = () => {
+  const { info } = useContext(Organization);
+
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState();
 
@@ -76,14 +79,15 @@ const CreateCollection = () => {
         );
         const address = await contract.getColAddressByName("Join3");
         //todo 获取org的名字，获取type类型
-        const orgId = "63a023d60cb4b787be757a74";
+        const orgId = info._id;
+
         fetch(`http://47.99.143.186/api/org/${orgId}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
           body: {
-            name: "seedao",
+            name: info.name,
             projects: { name: collectionName ?? projectName, address: address },
           },
         });

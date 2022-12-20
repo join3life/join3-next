@@ -1,17 +1,17 @@
-import { ReactNode, useContext } from 'react'
-import { AiOutlineGlobal, AiOutlineSetting } from 'react-icons/ai'
-import { IoPersonCircle } from 'react-icons/io5'
-import { FiTwitter } from 'react-icons/fi'
-import { RxDiscordLogo } from 'react-icons/rx'
-import { useRouter } from 'next/router'
+import { ReactNode, useContext } from "react";
+import { AiOutlineGlobal, AiOutlineSetting } from "react-icons/ai";
+import { IoPersonCircle } from "react-icons/io5";
+import { FiTwitter } from "react-icons/fi";
+import { RxDiscordLogo } from "react-icons/rx";
+import { useRouter } from "next/router";
 
-import Header from './Headers'
-import Organization from '../../contexts/Organization'
+import Header from "./Headers";
+import Organization from "../../contexts/Organization";
 
 export function OrgLayoutComponent({ children }: { children: ReactNode }) {
-  const router = useRouter()
-  const { info } = useContext(Organization)
-  console.log(info)
+  const router = useRouter();
+  const { info } = useContext(Organization);
+  console.log(info);
   return (
     <>
       <Header />
@@ -22,18 +22,18 @@ export function OrgLayoutComponent({ children }: { children: ReactNode }) {
           alt=""
         />
         <div className="absolute top-[210px] left-1/2">
-          {info.image ? (
+          {info?.image ? (
             <div className="f-c-c w-20 h-20 rounded-full overflow-clip">
-              <img src={info.image as string} alt="" />
+              <img src={info?.image as string} alt="" />
             </div>
           ) : (
             <IoPersonCircle size={60} />
-          )}{' '}
+          )}{" "}
         </div>
       </div>
       <div className="flex gap-6">
         <div className="basis-[48%]"></div>
-        <div className="">{info.name}</div>
+        <div className="">{info?.name}</div>
         <div className="font-[300]">201 follower</div>
         <div className="flex gap-6">
           <div className="cursor-pointer">
@@ -59,11 +59,11 @@ export function OrgLayoutComponent({ children }: { children: ReactNode }) {
               className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li
-                onClick={() => router.push('/Collection/CreateCollectionStep1')}
+                onClick={() => router.push("/Collection/CreateCollectionStep1")}
               >
                 <a>Manage collection</a>
               </li>
-              <li>
+              <li onClick={() => router.push("/Badge")}>
                 <a>Account manage</a>
               </li>
             </ul>
@@ -74,41 +74,41 @@ export function OrgLayoutComponent({ children }: { children: ReactNode }) {
         <div className="flex gap-10 border-b-2 pl-20 pb-4">
           <div
             className={
-              router.pathname === '/OrganizationProfile'
-                ? 'cp border-b-4 border-[black] px-2 py-1'
-                : 'cp px-2 py-1'
+              router.pathname === "/OrganizationProfile"
+                ? "cp border-b-4 border-[black] px-2 py-1"
+                : "cp px-2 py-1"
             }
-            onClick={() => router.push('/OrganizationProfile')}
+            onClick={() => router.push("/OrganizationProfile")}
           >
             <div className="h-2 w-2 rounded-full bg-black mt-2"></div>
           </div>
           <div
             className={
-              router.pathname === '/OrganizationProfile/Member'
-                ? 'cp border-b-4 border-[black]'
-                : 'cp'
+              router.pathname === "/OrganizationProfile/Member"
+                ? "cp border-b-4 border-[black]"
+                : "cp"
             }
-            onClick={() => router.push('/OrganizationProfile/Member')}
+            onClick={() => router.push("/OrganizationProfile/Member")}
           >
             Member
           </div>
           <div
             className={
-              router.pathname === '/OrganizationProfile/Projects'
-                ? 'cp border-b-4 border-[black]'
-                : 'cp'
+              router.pathname === "/OrganizationProfile/Projects"
+                ? "cp border-b-4 border-[black]"
+                : "cp"
             }
-            onClick={() => router.push('/OrganizationProfile/Projects')}
+            onClick={() => router.push("/OrganizationProfile/Projects")}
           >
             Projects
           </div>
           <div
             className={
-              router.pathname === '/OrganizationProfile/Event'
-                ? 'cp border-b-4 border-[black]'
-                : 'cp'
+              router.pathname === "/OrganizationProfile/Event"
+                ? "cp border-b-4 border-[black]"
+                : "cp"
             }
-            onClick={() => router.push('/OrganizationProfile/Event')}
+            onClick={() => router.push("/OrganizationProfile/Event")}
           >
             Event
           </div>
@@ -116,9 +116,9 @@ export function OrgLayoutComponent({ children }: { children: ReactNode }) {
         <div className="px-12 py-5">{children}</div>
       </div>
     </>
-  )
+  );
 }
 
 export function OrganizationLayout(page: ReactNode): JSX.Element {
-  return <OrgLayoutComponent>{page}</OrgLayoutComponent>
+  return <OrgLayoutComponent>{page}</OrgLayoutComponent>;
 }

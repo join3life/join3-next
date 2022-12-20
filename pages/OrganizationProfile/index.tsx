@@ -7,12 +7,6 @@ import axios from "axios";
 import { useState } from "react";
 
 const OrganizationProfile: NextPageWithLayout = () => {
-  const [data, setData] = useState(); // set Formdata
-
-  fetch("http://47.99.143.186//api/org", { method: "post", body: "213" }).then(
-    (res) => console.log(res)
-  );
-
   return (
     <div className="flex flex-col gap-5">
       <PreviewContainer

@@ -75,6 +75,16 @@ const CreateCollection = () => {
         console.log("contractAddress", contractAddress, contractABI);
         const addr = await contract.getColAddressByName(collectionName);
         console.log("addr", addr);
+        fetch(`http://47.99.143.186/api/org/${orgId}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: {
+            name: info.name,
+            projects: { name: collectionName ?? projectName, address: addr },
+          },
+        });
       }
     } catch (err) {
       console.log("error: ", err);
@@ -167,7 +177,7 @@ const CreateCollection = () => {
       </div>
       <div className="f-c-c mt-4">
         <div className="btn" onClick={() => getaddress()}>
-          getAddress
+          getAddressWithOrgnization
         </div>
       </div>
     </div>

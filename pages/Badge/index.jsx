@@ -13,6 +13,7 @@ import {
 import { ethers } from "ethers";
 import { useAccount } from "wagmi";
 import Organization from "../../contexts/Organization";
+import { convertSvgToFile } from "../../utils/tool";
 
 // Exported Types
 
@@ -37,18 +38,17 @@ export default function Badge() {
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [img, setImg] = useState([]);
   const [ipfsUri, setIpfsUri] = useState("");
   const [ipfs, setIpfs] = useState("");
 
   const { address } = useAccount();
 
-  const StoreMetadata = async (image, Name, Description, Collectionname) => {
+  const StoreMetadata = async (Name, Description, Collectionname) => {
     console.log("Preparing Metadata ....");
     const nft = {
       name: Name,
       description: Description,
-      image: image,
+      image: convertSvgToFile(Name),
       attributes: [
         {
           trait_type: "projects", // projects, skills, events 这边是用户选择的 ( select 下拉)
@@ -64,16 +64,9 @@ export default function Badge() {
   };
 
   const onSubmit = async (data) => {
-    console.log("data", data);
-    console.log("name", name);
-    console.log("img", img);
     try {
-      const metadata = await StoreMetadata(
-        img,
-        name,
-        data.description,
-        data.name
-      );
+      setIpfs(null);
+      const metadata = await StoreMetadata(name, data.description, data.name);
       const uri = metadata.url;
       setIpfs(uri);
       const url = `https://ipfs.io/ipfs/${metadata.ipnft}`;
@@ -87,7 +80,8 @@ export default function Badge() {
           contractABI,
           signer
         );
-        contract.mintNFT(name, ipfs, data.address); //todo name 因为合约创建不一致的原因，无法用
+        console.log("url", url);
+        ipfs && contract.mintNFT(name, ipfs, data.address); //todo name 因为合约创建不一致的原因，无法用
       }
     } catch (err) {
       console.log(err);
@@ -182,12 +176,6 @@ export default function Badge() {
                   required: "Please enter a your name.",
                 })}
               />
-              <label>
-                <input
-                  type="file"
-                  onChange={(e) => setImg(e.target.files[0])}
-                ></input>
-              </label>
               <div className="f-c-c mt-6">
                 <button className="btn" type="submit">
                   Create

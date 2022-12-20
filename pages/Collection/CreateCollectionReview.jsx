@@ -61,7 +61,6 @@ const CreateCollection = () => {
     console.log(`selected ${value}`);
   };
 
-
   const getaddress = async () => {
     try {
       const { ethereum } = window;
@@ -69,18 +68,18 @@ const CreateCollection = () => {
         const provider = new ethers.providers.Web3Provider(ethereum);
         const signer = provider.getSigner();
         const contract = new ethers.Contract(
-          contractAddress, contractABI,
+          contractAddress,
+          contractABI,
           signer
         );
-        console.log('contractAddress', contractAddress, contractABI)
-        const addr = await contract.getColAddressByName("JOidkkdn3skd");
-        console.log('addr', addr)
+        console.log("contractAddress", contractAddress, contractABI);
+        const addr = await contract.getColAddressByName(collectionName);
+        console.log("addr", addr);
       }
     } catch (err) {
       console.log("error: ", err);
     }
-
-  }
+  };
   const successful = async () => {
     // try {
     //   const { ethereum } = window;
@@ -98,20 +97,20 @@ const CreateCollection = () => {
         const provider = new ethers.providers.Web3Provider(ethereum);
         const signer = provider.getSigner();
         const contract = new ethers.Contract(
-          contractAddress, contractABI,
+          contractAddress,
+          contractABI,
           signer
         );
-        console.log('contractAddress', contractAddress, contractABI)
+        console.log("contractAddress", contractAddress, contractABI);
         const res = await contract.initCollection(
-          "JOidkkdn3skd",  // Collection name
-          "symbol"  // ERC721 的 symbol，用户可以不填这个，没啥用
-        )
-        console.log('res', res)
+          collectionName, // Collection name
+          "symbol" // ERC721 的 symbol，用户可以不填这个，没啥用
+        );
+        console.log("res", res);
 
         // const address = await contract.getColAddressByName("Join2232212");
         // console.log('address  ', address)
         return;
-
 
         //todo 获取org的名字，获取type类型
         const orgId = info._id;
@@ -171,7 +170,6 @@ const CreateCollection = () => {
           getAddress
         </div>
       </div>
-
     </div>
   );
 };

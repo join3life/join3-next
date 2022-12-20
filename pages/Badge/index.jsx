@@ -23,9 +23,9 @@ export default function Badge() {
   const { skills, events, projects } = info;
   console.log("info", info);
 
-  const collection = [...skills, ...events, ...projects];
+  // const collection = [...skills, ...events, ...projects];
 
-  console.log(collection);
+  // console.log(collection);
   const {
     register,
     handleSubmit,
@@ -121,7 +121,7 @@ export default function Badge() {
               <option disabled selected>
                 Please choose Collection
               </option>
-              {collection.map((item) => {
+              {/* {collection.map((item) => {
                 return (
                   <>
                     <option
@@ -131,7 +131,7 @@ export default function Badge() {
                     ></option>
                   </>
                 );
-              })}
+              })} */}
             </select>
             {/* <div>
               <button

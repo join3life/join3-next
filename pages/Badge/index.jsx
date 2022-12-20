@@ -14,6 +14,7 @@ import { ethers } from "ethers";
 import { useAccount } from "wagmi";
 import Organization from "../../contexts/Organization";
 import { convertSvgToFile } from "../../utils/tool";
+import { useEffect } from "react";
 
 // Exported Types
 
@@ -22,10 +23,12 @@ export default function Badge() {
   const { info } = useContext(Organization);
   console.log("info", info);
 
-  const [collection, setCollection] = useState([]);
-  if (info) {
-    setCollection([...info?.skills, ...info?.events, ...info?.projects]);
-  }
+  const [collection, setCollection] = useState();
+  useEffect(() => {
+    if (info) {
+      setCollection([...info?.skills, ...info?.events, ...info?.projects]);
+    }
+  }, []);
 
   console.log(collection);
   const {

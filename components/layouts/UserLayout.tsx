@@ -1,49 +1,49 @@
-import Link from 'next/link'
-import { ReactNode, useContext, useState } from 'react'
-import { BiEdit } from 'react-icons/bi'
-import { FaChevronCircleRight, FaDiscord, FaRegCopy } from 'react-icons/fa'
-import { AiFillTwitterCircle, AiFillGithub } from 'react-icons/ai'
-import { useRouter } from 'next/router'
-import Header from './Headers'
-import { useAccount } from 'wagmi'
-import { message } from 'antd'
-import { useQuery } from 'react-query'
-import Organization from '../../contexts/Organization'
+import Link from "next/link";
+import { ReactNode, useContext, useState } from "react";
+import { BiEdit } from "react-icons/bi";
+import { FaChevronCircleRight, FaDiscord, FaRegCopy } from "react-icons/fa";
+import { AiFillTwitterCircle, AiFillGithub } from "react-icons/ai";
+import { useRouter } from "next/router";
+import Header from "./Headers";
+import { useAccount } from "wagmi";
+import { message } from "antd";
+import { useQuery } from "react-query";
+import Organization from "../../contexts/Organization";
 /**
  * @package
  */
 export function Layout({ children }: { children: ReactNode }) {
-  const [isSidebarOpen, setSidebarOpen] = useState(false)
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
 
   return (
     <>
       <Header />
       <main>{children}</main>
     </>
-  )
+  );
 }
 
 /**
  * @package
  */
 export function UserLayoutComponent({ children }: { children: ReactNode }) {
-  const router = useRouter()
-  const { address, isConnected, connector } = useAccount()
-  const { setInfo } = useContext(Organization)
+  const router = useRouter();
+  const { address, isConnected, connector } = useAccount();
+  const { setInfo } = useContext(Organization);
 
-  console.log(address, isConnected, connector)
+  console.log(address, isConnected, connector);
   const showAddress = isConnected
-    ? address?.slice(0, 5) + '...' + address?.slice(-4)
-    : 'please connect wallet'
+    ? address?.slice(0, 5) + "..." + address?.slice(-4)
+    : "please connect wallet";
 
   const CopyAddress = () => {
-    navigator.clipboard.writeText(address!)
-    message.success('Copied')
-  }
+    navigator.clipboard.writeText(address!);
+    message.success("Copied");
+  };
 
-  const { data } = useQuery('repoData', () =>
-    fetch('http://47.99.143.186/api/org').then(res => res.json())
-  )
+  const { data } = useQuery("repoData", () =>
+    fetch("http://47.99.143.186/api/org").then((res) => res.json())
+  );
 
   //在这里写slider bar和header的layout布局 组件抽离再封装
   return (
@@ -116,14 +116,13 @@ export function UserLayoutComponent({ children }: { children: ReactNode }) {
               </div>
               <div className="mt-5">
                 {data?.slice(0, 5)?.map((item: any, index: number) => {
-                  console.log(item)
                   return (
                     <div
                       key={index}
                       className="flex gap-3 items-center mt-[18px]"
                       onClick={() => {
-                        router.push('/OrganizationProfile')
-                        setInfo(item)
+                        router.push("/OrganizationProfile");
+                        setInfo(item);
                       }}
                     >
                       <div className="w-[44px] h-[44px] rounded-[50%] overflow-clip cursor-pointer">
@@ -133,7 +132,7 @@ export function UserLayoutComponent({ children }: { children: ReactNode }) {
                         {item.name}
                       </div>
                     </div>
-                  )
+                  );
                 })}
               </div>
             </div>
@@ -142,9 +141,9 @@ export function UserLayoutComponent({ children }: { children: ReactNode }) {
             <div className="flex justify-evenly">
               <Link
                 className={
-                  router.pathname === '/UserProfile/Feed'
-                    ? 'btn w-[100px]'
-                    : 'btn w-[100px] bg-white text-black hover:text-white'
+                  router.pathname === "/UserProfile/Feed"
+                    ? "btn w-[100px]"
+                    : "btn w-[100px] bg-white text-black hover:text-white"
                 }
                 href="/UserProfile/Feed"
               >
@@ -152,9 +151,9 @@ export function UserLayoutComponent({ children }: { children: ReactNode }) {
               </Link>
               <Link
                 className={
-                  router.pathname === '/UserProfile/Projects'
-                    ? 'btn w-[100px]'
-                    : 'btn w-[100px] bg-white text-black hover:text-white'
+                  router.pathname === "/UserProfile/Projects"
+                    ? "btn w-[100px]"
+                    : "btn w-[100px] bg-white text-black hover:text-white"
                 }
                 href="/UserProfile/Projects"
               >
@@ -162,9 +161,9 @@ export function UserLayoutComponent({ children }: { children: ReactNode }) {
               </Link>
               <Link
                 className={
-                  router.pathname === '/UserProfile/Skills'
-                    ? 'btn w-[100px]'
-                    : 'btn w-[100px] bg-white text-black hover:text-white'
+                  router.pathname === "/UserProfile/Skills"
+                    ? "btn w-[100px]"
+                    : "btn w-[100px] bg-white text-black hover:text-white"
                 }
                 href="/UserProfile/Skills"
               >
@@ -172,9 +171,9 @@ export function UserLayoutComponent({ children }: { children: ReactNode }) {
               </Link>
               <Link
                 className={
-                  router.pathname === '/UserProfile/Interests'
-                    ? 'btn w-[100px]'
-                    : 'btn w-[100px] bg-white text-black hover:text-white'
+                  router.pathname === "/UserProfile/Interests"
+                    ? "btn w-[100px]"
+                    : "btn w-[100px] bg-white text-black hover:text-white"
                 }
                 href="/UserProfile/Interests"
               >
@@ -186,12 +185,12 @@ export function UserLayoutComponent({ children }: { children: ReactNode }) {
         </div>
       </div>
     </>
-  )
+  );
 }
 
 /**
  * @package
  */
 export function UserLayout(page: ReactNode): JSX.Element {
-  return <UserLayoutComponent>{page}</UserLayoutComponent>
+  return <UserLayoutComponent>{page}</UserLayoutComponent>;
 }

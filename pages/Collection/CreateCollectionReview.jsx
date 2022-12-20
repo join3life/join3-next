@@ -72,12 +72,10 @@ const CreateCollection = () => {
           contractABI,
           signer
         );
-        const res = await contract.initCollection(
-          collectionName,
-          type,
-          description
-        );
-        const address = await contract.getColAddressByName("Join3");
+        const res = await contract.initCollection("tst", "test");
+        console.log(res);
+        const address = await contract.getColAddressByName("tst");
+
         //todo 获取org的名字，获取type类型
         const orgId = info._id;
 

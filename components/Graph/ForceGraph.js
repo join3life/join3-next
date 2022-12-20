@@ -149,12 +149,6 @@ function componentToHex(c) {
   return hex.length == 1 ? '0' + hex : hex
 }
 
-function rgbToHex(col) {
-  const [r, g, b] = col.split('(')[1].split(')')[0]
-  const c = '#' + componentToHex(r) + componentToHex(g) + componentToHex(b)
-  return c.replace(',', '').trim()
-}
-
 class ForceGraph extends Component {
   constructor() {
     super()

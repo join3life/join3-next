@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { ReactNode, useContext } from 'react'
 import { AiOutlineGlobal, AiOutlineSetting } from 'react-icons/ai'
 import { IoPersonCircle } from 'react-icons/io5'
 import { FiTwitter } from 'react-icons/fi'
@@ -6,10 +6,12 @@ import { RxDiscordLogo } from 'react-icons/rx'
 import { useRouter } from 'next/router'
 
 import Header from './Headers'
+import Organization from '../../contexts/Organization'
 
 export function OrgLayoutComponent({ children }: { children: ReactNode }) {
   const router = useRouter()
-
+  const { info } = useContext(Organization)
+  console.log(info)
   return (
     <>
       <Header />
@@ -19,13 +21,19 @@ export function OrgLayoutComponent({ children }: { children: ReactNode }) {
           src="https://react-starport-eta.vercel.app/assets/picture6.f7e0abb5.png"
           alt=""
         />
-        <div className="absolute top-[226px] left-1/2">
-          <IoPersonCircle size={60} />
+        <div className="absolute top-[210px] left-1/2">
+          {info.image ? (
+            <div className="f-c-c w-20 h-20 rounded-full overflow-clip">
+              <img src={info.image as string} alt="" />
+            </div>
+          ) : (
+            <IoPersonCircle size={60} />
+          )}{' '}
         </div>
       </div>
       <div className="flex gap-6">
         <div className="basis-[48%]"></div>
-        <div className="">Richard</div>
+        <div className="">{info.name}</div>
         <div className="font-[300]">201 follower</div>
         <div className="flex gap-6">
           <div className="cursor-pointer">

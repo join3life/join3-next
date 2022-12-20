@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router'
 import { AiFillGift } from 'react-icons/ai'
 import { useDisconnect, useAccount } from 'wagmi'
+import Logo from '../../../public/images/join3.svg'
 
 const Header = props => {
   const router = useRouter()
@@ -19,7 +20,7 @@ const Header = props => {
   return (
     <div className="border-b h-[60px] bg-[#C9CDD4] flex justify-between items-center">
       <div className="cp pl-4" onClick={() => router.push('/')}>
-        LOGO
+        <img src={Logo} alt="" />
       </div>
       <div className="flex items-center gap-2">
         <div className="indicator cursor-pointer">

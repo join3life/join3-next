@@ -20,12 +20,14 @@ import { convertSvgToFile } from "../../utils/tool";
 export default function Badge() {
   const router = useRouter();
   const { info } = useContext(Organization);
-  const { skills, events, projects } = info;
   console.log("info", info);
 
-  // const collection = [...skills, ...events, ...projects];
+  const [collection, setCollection] = useState([]);
+  if (info) {
+    setCollection([...info?.skills, ...info?.events, ...info?.projects]);
+  }
 
-  // console.log(collection);
+  console.log(collection);
   const {
     register,
     handleSubmit,
@@ -121,7 +123,7 @@ export default function Badge() {
               <option disabled selected>
                 Please choose Collection
               </option>
-              {/* {collection.map((item) => {
+              {collection?.map((item) => {
                 return (
                   <>
                     <option
@@ -131,7 +133,7 @@ export default function Badge() {
                     ></option>
                   </>
                 );
-              })} */}
+              })}
             </select>
             {/* <div>
               <button

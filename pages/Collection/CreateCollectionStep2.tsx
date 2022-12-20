@@ -1,81 +1,81 @@
-import { useState } from 'react'
-import { LoadingOutlined, PlusOutlined } from '@ant-design/icons'
-import { message, Upload, Select } from 'antd'
-import type { UploadChangeParam } from 'antd/es/upload'
-import type { SelectProps } from 'antd/es/select'
-import type { RcFile, UploadFile, UploadProps } from 'antd/es/upload/interface'
-import { useRouter } from 'next/router'
-import Back from '../../components/Back'
+import { useState } from "react";
+import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
+import { message, Upload, Select } from "antd";
+import type { UploadChangeParam } from "antd/es/upload";
+import type { SelectProps } from "antd/es/select";
+import type { RcFile, UploadFile, UploadProps } from "antd/es/upload/interface";
+import { useRouter } from "next/router";
+import Back from "../../components/Back";
 
 const getBase64 = (img: RcFile, callback: (url: string) => void) => {
-  const reader = new FileReader()
-  reader.addEventListener('load', () => callback(reader.result as string))
-  reader.readAsDataURL(img)
-}
+  const reader = new FileReader();
+  reader.addEventListener("load", () => callback(reader.result as string));
+  reader.readAsDataURL(img);
+};
 
 const beforeUpload = (file: RcFile) => {
-  const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png'
+  const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
   if (!isJpgOrPng) {
-    message.error('You can only upload JPG/PNG file!')
+    message.error("You can only upload JPG/PNG file!");
   }
-  const isLt2M = file.size / 1024 / 1024 < 2
+  const isLt2M = file.size / 1024 / 1024 < 2;
   if (!isLt2M) {
-    message.error('Image must smaller than 2MB!')
+    message.error("Image must smaller than 2MB!");
   }
-  return isJpgOrPng && isLt2M
-}
+  return isJpgOrPng && isLt2M;
+};
 
-const options: SelectProps['options'] = [
+const options: SelectProps["options"] = [
   {
-    value: '前端',
-    label: '前端'
+    value: "前端",
+    label: "前端",
   },
   {
-    value: '后端',
-    label: '后端'
+    value: "后端",
+    label: "后端",
   },
   {
-    value: '设计',
-    label: '设计'
+    value: "设计",
+    label: "设计",
   },
   {
-    value: '运营',
-    label: '运营'
-  }
-]
+    value: "运营",
+    label: "运营",
+  },
+];
 
 const CreateCollection = () => {
-  const [loading, setLoading] = useState(false)
-  const [imageUrl, setImageUrl] = useState<string>()
+  const [loading, setLoading] = useState(false);
+  const [imageUrl, setImageUrl] = useState<string>();
 
-  const router = useRouter()
+  const router = useRouter();
 
-  const handleChange: UploadProps['onChange'] = (
+  const handleChange: UploadProps["onChange"] = (
     info: UploadChangeParam<UploadFile>
   ) => {
-    if (info.file.status === 'uploading') {
-      setLoading(true)
-      return
+    if (info.file.status === "uploading") {
+      setLoading(true);
+      return;
     }
-    if (info.file.status === 'done') {
+    if (info.file.status === "done") {
       // Get this url from response in real world.
-      getBase64(info.file.originFileObj as RcFile, url => {
-        setLoading(false)
-        setImageUrl(url)
-      })
+      getBase64(info.file.originFileObj as RcFile, (url) => {
+        setLoading(false);
+        setImageUrl(url);
+      });
     }
-  }
+  };
 
   const uploadButton = (
     <div className="w-30">
       {loading ? <LoadingOutlined /> : <PlusOutlined />}
       <div className="mt-2">Upload default badge image</div>
     </div>
-  )
+  );
 
   const handleChangeSelect = (value: string) => {
-    console.log(`selected ${value}`)
-  }
+    console.log(`selected ${value}`);
+  };
 
   return (
     <div className="px-[54px] py-6">
@@ -132,21 +132,21 @@ const CreateCollection = () => {
               onChange={handleChangeSelect}
               options={[
                 {
-                  value: 'Skill',
-                  label: 'Skill'
+                  value: "skills",
+                  label: "skills",
                 },
                 {
-                  value: 'Project',
-                  label: 'Project'
+                  value: "projects",
+                  label: "projects",
                 },
                 {
-                  value: 'Event',
-                  label: 'Event'
+                  value: "events",
+                  label: "events",
                 },
                 {
-                  value: 'Role',
-                  label: 'Role'
-                }
+                  value: "Role",
+                  label: "Role",
+                },
               ]}
             />
           </div>
@@ -178,7 +178,7 @@ const CreateCollection = () => {
             onChange={handleChange}
           >
             {imageUrl ? (
-              <img src={imageUrl} alt="avatar" style={{ width: '100%' }} />
+              <img src={imageUrl} alt="avatar" style={{ width: "100%" }} />
             ) : (
               uploadButton
             )}
@@ -188,13 +188,13 @@ const CreateCollection = () => {
       <div className="f-c-c mt-4">
         <div
           className="btn"
-          onClick={() => router.push('/Collection/CreateCollectionReview')}
+          onClick={() => router.push("/Collection/CreateCollectionReview")}
         >
           Continue
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CreateCollection
+export default CreateCollection;

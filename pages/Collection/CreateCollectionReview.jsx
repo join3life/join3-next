@@ -63,6 +63,7 @@ const CreateCollection = () => {
   };
 
   const getaddress = async () => {
+    console.log(type);
     try {
       const { ethereum } = window;
       if (ethereum) {

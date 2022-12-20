@@ -109,15 +109,15 @@ const CreateCollection = () => {
               options={[
                 {
                   value: "skills",
-                  label: "Skill",
+                  label: "skills",
                 },
                 {
                   value: "projects",
-                  label: "Project",
+                  label: "projects",
                 },
                 {
                   value: "events",
-                  label: "Event",
+                  label: "events",
                 },
                 {
                   value: "Role",

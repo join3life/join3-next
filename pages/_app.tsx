@@ -1,34 +1,34 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
-import { createClient, configureChains, WagmiConfig, mainnet } from 'wagmi'
-import { polygon, optimism } from 'wagmi/chains'
-import { publicProvider } from 'wagmi/providers/public'
-import { SessionProvider } from 'next-auth/react'
-import { ReactElement, ReactNode, useState } from 'react'
-import { NextPage } from 'next'
-import Collection from '../contexts/Collection'
-import { CoinbaseWalletConnector } from 'wagmi/connectors/coinbaseWallet'
-import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
-import { InjectedConnector } from 'wagmi/connectors/injected'
-import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
-import { QueryClient, QueryClientProvider } from 'react-query'
-import Organization from '../contexts/Organization'
+import "../styles/globals.css";
+import type { AppProps } from "next/app";
+import { createClient, configureChains, WagmiConfig, mainnet } from "wagmi";
+import { polygon, optimism } from "wagmi/chains";
+import { publicProvider } from "wagmi/providers/public";
+import { SessionProvider } from "next-auth/react";
+import { ReactElement, ReactNode, useState } from "react";
+import { NextPage } from "next";
+import Collection from "../contexts/Collection";
+import { CoinbaseWalletConnector } from "wagmi/connectors/coinbaseWallet";
+import { WalletConnectConnector } from "wagmi/connectors/walletConnect";
+import { InjectedConnector } from "wagmi/connectors/injected";
+import { MetaMaskConnector } from "wagmi/connectors/metaMask";
+import { QueryClient, QueryClientProvider } from "react-query";
+import Organization from "../contexts/Organization";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
-  getLayout?: (page: ReactElement) => ReactNode
-}
+  getLayout?: (page: ReactElement) => ReactNode;
+};
 
 type AppPropsWithLayout = AppProps & {
-  Component: NextPageWithLayout
-}
+  Component: NextPageWithLayout;
+};
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient();
 
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const { chains, provider, webSocketProvider } = configureChains(
     [mainnet, polygon],
     [publicProvider()]
-  )
+  );
 
   // Set up client
   const client = createClient({
@@ -38,34 +38,34 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
       new CoinbaseWalletConnector({
         chains,
         options: {
-          appName: 'wagmi'
-        }
+          appName: "wagmi",
+        },
       }),
       new WalletConnectConnector({
         chains,
         options: {
-          qrcode: true
-        }
+          qrcode: true,
+        },
       }),
       new InjectedConnector({
         chains,
         options: {
-          name: 'Injected',
-          shimDisconnect: true
-        }
-      })
+          name: "Injected",
+          shimDisconnect: true,
+        },
+      }),
     ],
     provider,
-    webSocketProvider
-  })
+    webSocketProvider,
+  });
 
-  const getLayout = Component.getLayout ?? (page => page)
+  const getLayout = Component.getLayout ?? ((page) => page);
 
-  const [collectionName, setCollectionName] = useState('')
-  const [type, setType] = useState('Skill')
-  const [description, setDescription] = useState('')
-  const [projectName, setProjectName] = useState('')
-  const [info, setInfo] = useState<any>()
+  const [collectionName, setCollectionName] = useState("");
+  const [type, setType] = useState("skills");
+  const [description, setDescription] = useState("");
+  const [projectName, setProjectName] = useState("");
+  const [info, setInfo] = useState<any>();
 
   const collectionContextValue = {
     collectionName,
@@ -75,13 +75,13 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
     description,
     setDescription,
     projectName,
-    setProjectName
-  }
+    setProjectName,
+  };
 
   const organizationContextValue = {
     info,
-    setInfo
-  }
+    setInfo,
+  };
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -95,7 +95,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
         </SessionProvider>
       </WagmiConfig>
     </QueryClientProvider>
-  )
+  );
 }
 
-export default MyApp
+export default MyApp;

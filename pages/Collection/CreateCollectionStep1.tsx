@@ -1,35 +1,35 @@
-import { useContext, useState } from 'react'
-import { LoadingOutlined, PlusOutlined } from '@ant-design/icons'
-import { message, Upload, Select } from 'antd'
-import type { UploadChangeParam } from 'antd/es/upload'
-import type { RcFile, UploadFile, UploadProps } from 'antd/es/upload/interface'
-import { useRouter } from 'next/router'
-import Back from '../../components/Back'
-import Collection from '../../contexts/Collection'
+import { useContext, useState } from "react";
+import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
+import { message, Upload, Select } from "antd";
+import type { UploadChangeParam } from "antd/es/upload";
+import type { RcFile, UploadFile, UploadProps } from "antd/es/upload/interface";
+import { useRouter } from "next/router";
+import Back from "../../components/Back";
+import Collection from "../../contexts/Collection";
 
 const getBase64 = (img: RcFile, callback: (url: string) => void) => {
-  const reader = new FileReader()
-  reader.addEventListener('load', () => callback(reader.result as string))
-  reader.readAsDataURL(img)
-}
+  const reader = new FileReader();
+  reader.addEventListener("load", () => callback(reader.result as string));
+  reader.readAsDataURL(img);
+};
 
 const beforeUpload = (file: RcFile) => {
-  const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png'
+  const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
   if (!isJpgOrPng) {
-    message.error('You can only upload JPG/PNG file!')
+    message.error("You can only upload JPG/PNG file!");
   }
-  const isLt2M = file.size / 1024 / 1024 < 2
+  const isLt2M = file.size / 1024 / 1024 < 2;
   if (!isLt2M) {
-    message.error('Image must smaller than 2MB!')
+    message.error("Image must smaller than 2MB!");
   }
-  return isJpgOrPng && isLt2M
-}
+  return isJpgOrPng && isLt2M;
+};
 
 const CreateCollection = () => {
-  const [loading, setLoading] = useState(false)
-  const [imageUrl, setImageUrl] = useState<string>()
+  const [loading, setLoading] = useState(false);
+  const [imageUrl, setImageUrl] = useState<string>();
 
-  const router = useRouter()
+  const router = useRouter();
   const {
     collectionName,
     setCollectionName,
@@ -38,45 +38,45 @@ const CreateCollection = () => {
     description,
     setDescription,
     projectName,
-    setProjectName
-  } = useContext(Collection)
+    setProjectName,
+  } = useContext(Collection);
 
-  const handleChange: UploadProps['onChange'] = (
+  const handleChange: UploadProps["onChange"] = (
     info: UploadChangeParam<UploadFile>
   ) => {
-    if (info.file.status === 'uploading') {
-      setLoading(true)
-      return
+    if (info.file.status === "uploading") {
+      setLoading(true);
+      return;
     }
-    if (info.file.status === 'done') {
+    if (info.file.status === "done") {
       // Get this url from response in real world.
-      getBase64(info.file.originFileObj as RcFile, url => {
-        setLoading(false)
-        setImageUrl(url)
-      })
+      getBase64(info.file.originFileObj as RcFile, (url) => {
+        setLoading(false);
+        setImageUrl(url);
+      });
     }
-  }
+  };
 
   const uploadButton = (
     <div className="w-18">
       {loading ? <LoadingOutlined /> : <PlusOutlined />}
       <div className="mt-2">Upload collection cover</div>
     </div>
-  )
+  );
 
   const handleChangeSelect = (value: string) => {
-    setType!(value)
-  }
+    setType!(value);
+  };
 
   const jumpToStep2 = () => {
-    if (collectionName && description && type !== 'Project') {
-      router.push('/Collection/CreateCollectionStep2')
+    if (collectionName && description && type !== "Project") {
+      router.push("/Collection/CreateCollectionStep2");
     } else if (collectionName && description && projectName) {
-      router.push('/Collection/CreateCollectionStep2')
+      router.push("/Collection/CreateCollectionStep2");
     } else {
-      message.error('Please fill in the information')
+      message.error("Please fill in the information");
     }
-  }
+  };
 
   return (
     <div className="px-[54px] py-6">
@@ -97,7 +97,7 @@ const CreateCollection = () => {
             <input
               type="text"
               className="input input-bordered h-8 w-full max-w-xs"
-              onChange={e => setCollectionName!(e.target.value)}
+              onChange={(e) => setCollectionName!(e.target.value)}
             />
           </div>
           <div className="mt-[38px]">
@@ -108,31 +108,31 @@ const CreateCollection = () => {
               onChange={handleChangeSelect}
               options={[
                 {
-                  value: 'Skill',
-                  label: 'Skill'
+                  value: "skills",
+                  label: "Skill",
                 },
                 {
-                  value: 'Project',
-                  label: 'Project'
+                  value: "projects",
+                  label: "Project",
                 },
                 {
-                  value: 'Event',
-                  label: 'Event'
+                  value: "events",
+                  label: "Event",
                 },
                 {
-                  value: 'Role',
-                  label: 'Role'
-                }
+                  value: "Role",
+                  label: "Role",
+                },
               ]}
             />
           </div>
-          {type === 'Project' && (
+          {type === "Project" && (
             <div className="mt-[38px]">
               <div className="text-[30px] font-bold">Project name</div>
               <input
                 type="text"
                 className="input input-bordered h-8 w-full max-w-xs"
-                onChange={e => setProjectName!(e.target.value)}
+                onChange={(e) => setProjectName!(e.target.value)}
               />
             </div>
           )}
@@ -141,7 +141,7 @@ const CreateCollection = () => {
             <div className="text-[30px] font-bold">Collection Description</div>
             <textarea
               className="textarea textarea-bordered h-8 w-full max-w-xs"
-              onChange={e => setDescription!(e.target.value)}
+              onChange={(e) => setDescription!(e.target.value)}
             />
           </div>
         </div>
@@ -156,7 +156,7 @@ const CreateCollection = () => {
             onChange={handleChange}
           >
             {imageUrl ? (
-              <img src={imageUrl} alt="avatar" style={{ width: '100%' }} />
+              <img src={imageUrl} alt="avatar" style={{ width: "100%" }} />
             ) : (
               uploadButton
             )}
@@ -169,7 +169,7 @@ const CreateCollection = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CreateCollection
+export default CreateCollection;

@@ -28,6 +28,7 @@ const beforeUpload = (file) => {
 
 const CreateCollection = () => {
   const { info } = useContext(Organization);
+  console.log(info);
 
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState();
@@ -72,10 +73,8 @@ const CreateCollection = () => {
           contractABI,
           signer
         );
-        console.log("contractAddress", contractAddress, contractABI);
         const addr = await contract.getColAddressByName(collectionName);
         const orgId = info._id;
-        console.log("addr", addr);
         fetch(`http://47.99.143.186/api/org/${orgId}`, {
           method: "PUT",
           headers: {
@@ -83,7 +82,7 @@ const CreateCollection = () => {
           },
           body: JSON.stringify({
             name: info.name,
-            projects: { name: collectionName ?? projectName, address: addr },
+            [type]: { name: collectionName ?? projectName, address: addr },
           }),
         });
       }

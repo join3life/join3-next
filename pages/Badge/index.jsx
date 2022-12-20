@@ -24,8 +24,6 @@ export default function Badge() {
   console.log("info", info);
 
   const collection = [...skills, ...events, ...projects];
-  if (skills.length && events.length && projects.length) {
-  }
 
   console.log(collection);
   const {

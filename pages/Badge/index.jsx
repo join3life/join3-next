@@ -93,10 +93,16 @@ export default function Badge() {
       <header>
         <div className="border-b h-[60px] bg-[#C9CDD4] flex justify-center items-center">
           <div className="h-[55px] w-full flex justify-between items-center">
-            <div>back</div>
+            <div
+              onClick={() => {
+                router.push("/");
+              }}
+            >
+              back
+            </div>
             <div>
               <div>money</div>
-              <div>address</div>
+              <div>{address}</div>
             </div>
           </div>
         </div>

@@ -74,16 +74,17 @@ const CreateCollection = () => {
         );
         console.log("contractAddress", contractAddress, contractABI);
         const addr = await contract.getColAddressByName(collectionName);
+        const orgId = info._id;
         console.log("addr", addr);
         fetch(`http://47.99.143.186/api/org/${orgId}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
-          body: {
+          body: JSON.stringify({
             name: info.name,
             projects: { name: collectionName ?? projectName, address: addr },
-          },
+          }),
         });
       }
     } catch (err) {

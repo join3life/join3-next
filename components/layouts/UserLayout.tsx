@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import Header from "./Headers";
 import { useAccount } from "wagmi";
 import { message } from "antd";
+import { useQuery } from "react-query";
 /**
  * @package
  */
@@ -36,6 +37,10 @@ export function UserLayoutComponent({ children }: { children: ReactNode }) {
     navigator.clipboard.writeText(address!);
     message.success("Copied");
   };
+
+  const { data } = useQuery("repoData", () =>
+    fetch("http://47.99.143.186/api/org").then((res) => res.json())
+  );
 
   //在这里写slider bar和header的layout布局 组件抽离再封装
   return (
@@ -107,16 +112,18 @@ export function UserLayoutComponent({ children }: { children: ReactNode }) {
                 </div>
               </div>
               <div className="mt-5">
-                {[0, 1, 2, 3, 4].map((item) => {
+                {data?.slice(0, 5)?.map((item: any, index: number) => {
                   return (
                     <div
-                      key={item}
+                      key={index}
                       className="flex gap-3 items-center mt-[18px]"
                     >
                       <div className="w-[44px] h-[44px] rounded-[50%] overflow-clip cursor-pointer">
-                        <img src="https://placeimg.com/192/192/people" alt="" />
+                        <img src={item.image} alt="" />
                       </div>
-                      <div className="cursor-pointer text-[#333]">DAO</div>
+                      <div className="cursor-pointer text-[#333]">
+                        {item.name}
+                      </div>
                     </div>
                   );
                 })}

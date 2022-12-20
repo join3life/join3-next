@@ -30,7 +30,8 @@ const CreateCollection = () => {
   const [imageUrl, setImageUrl] = useState();
 
   const router = useRouter();
-  const { collectionName, type, description } = useContext(Collection);
+  const { collectionName, type, description, projectName } =
+    useContext(Collection);
 
   const handleChange = (info) => {
     if (info.file.status === "uploading") {
@@ -75,11 +76,15 @@ const CreateCollection = () => {
         );
         const address = await contract.getColAddressByName("Join3");
         //todo 获取org的名字，获取type类型
-        fetch("http://47.99.143.186/api/org", {
+        const orgId = "63a023d60cb4b787be757a74";
+        fetch(`http://47.99.143.186/api/org/${orgId}`, {
           method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
           body: {
             name: "seedao",
-            projects: { name: collectionName, address: address },
+            projects: { name: collectionName ?? projectName, address: address },
           },
         });
         console.log("init_contract status", type, res, address);

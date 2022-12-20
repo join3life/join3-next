@@ -9,5 +9,5 @@ export const contractAddress = "0xba8a4e4152902988170514b4f4eb125a4af8aad3" // �
 
 /* 测试 Factory 合约 */
 import abi from "./Factory.json";
-export const contractAddress = "0xfe0655a603e3ced14df174431e480659d54798b6"; // 测试合约的构造函数 */
+export const contractAddress = "0xcc439e2c97490d31aade36ad9bebddaa6f79b4ea"; // 测试合约的构造函数 */
 export const contractABI = abi.abi;

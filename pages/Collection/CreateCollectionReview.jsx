@@ -7,7 +7,7 @@ import Collection from "../../contexts/Collection";
 import { ethers } from "ethers";
 import { contractABI, contractAddress } from "../../utils/constants";
 import Organization from "../../contexts/Organization";
-
+import { useQuery } from "react-query";
 const getBase64 = (img, callback) => {
   const reader = new FileReader();
   reader.addEventListener("load", () => callback(reader.result));
@@ -27,7 +27,7 @@ const beforeUpload = (file) => {
 };
 
 const CreateCollection = () => {
-  const { info } = useContext(Organization);
+  const { info, setInfo } = useContext(Organization);
   console.log(info);
 
   const [loading, setLoading] = useState(false);
@@ -86,6 +86,14 @@ const CreateCollection = () => {
             [type]: { name: collectionName ?? projectName, address: addr },
           }),
         });
+        const newdata = await fetch("http://47.99.143.186/api/org").then(
+          (res) => res.json()
+        );
+        console.log(newdata);
+        const newinfo = newdata.find((item) => item._id === info._id);
+        console.log(newinfo);
+        setInfo(newinfo);
+        router.push("/Badge");
       }
     } catch (err) {
       console.log("error: ", err);

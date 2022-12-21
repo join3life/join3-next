@@ -126,11 +126,11 @@ export default function Badge() {
               <option disabled selected>
                 Please choose Collection
               </option>
-              {collection?.map((item) => {
+              {collection?.map((item, index) => {
                 return (
                   <>
                     <option
-                      key={item.id}
+                      key={index}
                       value={item.name}
                       label={item.name}
                     ></option>

@@ -67,7 +67,7 @@ export default function Badge() {
   };
 
   const onSubmit = async (data) => {
-    console.log(data);
+    console.log("data", data);
     try {
       setIpfs(null);
       const metadata = await StoreMetadata(

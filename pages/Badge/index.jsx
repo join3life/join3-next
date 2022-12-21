@@ -67,9 +67,14 @@ export default function Badge() {
   };
 
   const onSubmit = async (data) => {
+    console.log(data);
     try {
       setIpfs(null);
-      const metadata = await StoreMetadata(name, data.description, data.name);
+      const metadata = await StoreMetadata(
+        data.name, //用户填写的name
+        data.description,
+        data.name
+      );
       const uri = metadata.url;
       setIpfs(uri);
       const url = `https://ipfs.io/ipfs/${metadata.ipnft}`;
@@ -84,6 +89,7 @@ export default function Badge() {
           signer
         );
         console.log("url", url);
+        //collectionname
         ipfs && contract.mintNFT(name, ipfs, data.address); //todo name 因为合约创建不一致的原因，无法用
       }
     } catch (err) {

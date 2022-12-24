@@ -5,10 +5,7 @@ function convertSvgToFile(content) {
   const svg2 = `</text><text x="102.5" y="61" font-size="27" fill="#fff" filter="url(#A)" font-family="sans-serif" font-weight="bold">Join3 SBT</text></svg>`;
   const svgString = svg1 + content + svg2;
   console.log(svgString);
-  // create a Blob from the SVG string
   const blob = new Blob([svgString], { type: "image/svg+xml" });
-
   return blob;
-  // return dataUrl;
 }
 export { convertSvgToFile };

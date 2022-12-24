@@ -1,7 +1,7 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { createClient, configureChains, WagmiConfig, mainnet } from "wagmi";
-import { polygon, optimism } from "wagmi/chains";
+import { polygon } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 import { SessionProvider } from "next-auth/react";
 import { ReactElement, ReactNode, useState } from "react";

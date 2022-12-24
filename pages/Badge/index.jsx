@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { useForm } from 'react-hook-form'
 import { useState, useContext } from 'react'
 import { NFTStorage } from 'nft.storage'
@@ -10,39 +9,14 @@ import {
   contractAddress
 } from '../../utils/constants'
 import { ethers } from 'ethers'
-import { useAccount } from 'wagmi'
 import Organization from '../../contexts/Organization'
 import { convertSvgToFile } from '../../utils/tool'
 import { useEffect } from 'react'
-import { Select, Input } from 'antd'
+import { Select } from 'antd'
 import { IoIosAddCircleOutline } from 'react-icons/io'
 import { BsArrowUpCircleFill } from 'react-icons/bs'
-=======
-import { useRouter } from "next/router";
-import { useForm } from "react-hook-form";
-import { useState, useContext } from "react";
-import { NFTStorage } from "nft.storage";
-import Header from "../../components/layouts/Headers";
-import Back from "../../components/Back";
-import {
-  NFT_STORAGE_API_KEY,
-  contractABI,
-  contractAddress,
-} from "../../utils/constants";
-import { ethers } from "ethers";
-import { useAccount } from "wagmi";
-import Organization from "../../contexts/Organization";
-import { convertSvgToFile } from "../../utils/tool";
-import { useEffect } from "react";
-
-import { IoIosAddCircleOutline } from "react-icons/io";
-import { BsArrowUpCircleFill } from "react-icons/bs";
->>>>>>> 46336ac6a81791a80a90cb1880ebc71a377b3438
-
-// Exported Types
 
 export default function Badge() {
-<<<<<<< HEAD
   const { info } = useContext(Organization)
   console.log('info', info)
 
@@ -50,81 +24,67 @@ export default function Badge() {
   useEffect(() => {
     if (info) {
       setCollection([...info.skills, ...info.events, ...info.projects])
-=======
-  const { info } = useContext(Organization);
-  const [collection, setCollection] = useState();
-  useEffect(() => {
-    if (info) {
-      setCollection([...info?.skills, ...info?.events, ...info?.projects]);
->>>>>>> 46336ac6a81791a80a90cb1880ebc71a377b3438
     }
-  }, []);
+  }, [])
 
-  console.log(collection);
-  const { register, handleSubmit } = useForm();
-
-  const [name, setName] = useState("");
-  const [ipfs, setIpfs] = useState("");
+  const { register, handleSubmit } = useForm()
+  const [name, setName] = useState('')
+  const [ipfs, setIpfs] = useState('')
 
   const StoreMetadata = async (Name, Description, Collectionname) => {
-    console.log("Preparing Metadata ....");
+    console.log('Preparing Metadata ....')
     const nft = {
       name: Name,
       description: Description,
       image: convertSvgToFile(Name),
       attributes: [
         {
-          trait_type: "projects", // projects, skills, events 这边是用户选择的 ( select 下拉)
-          value: Collectionname, // ( 不需要填写，继承自 colletion，保持一致性)
-        },
-      ],
-    };
-    console.log("Uploading Metadata to IPFS ....");
-    const client = new NFTStorage({ token: NFT_STORAGE_API_KEY });
-    const metadata = await client.store(nft);
-    console.log("NFT data stored successfully 🚀🚀");
-    return metadata;
-  };
+          trait_type: 'projects', // projects, skills, events 这边是用户选择的 ( select 下拉)
+          value: Collectionname // ( 不需要填写，继承自 colletion，保持一致性)
+        }
+      ]
+    }
+    console.log('Uploading Metadata to IPFS ....')
+    const client = new NFTStorage({ token: NFT_STORAGE_API_KEY })
+    const metadata = await client.store(nft)
+    console.log('NFT data stored successfully 🚀🚀')
+    return metadata
+  }
 
-<<<<<<< HEAD
   const handleChange = value => {
     console.log(`selected ${value}`)
   }
 
   const onSubmit = async data => {
     console.log('data', data)
-=======
-  const onSubmit = async (data) => {
-    console.log("data", data);
->>>>>>> 46336ac6a81791a80a90cb1880ebc71a377b3438
     try {
-      setIpfs(null);
+      setIpfs(null)
       const metadata = await StoreMetadata(
         data.name, //用户填写的name
         data.description,
         data.name
-      );
-      const uri = metadata.url;
-      setIpfs(uri);
-      const url = `https://ipfs.io/ipfs/${metadata.ipnft}`;
-      setIpfsUri(url);
-      const { ethereum } = window;
+      )
+      const uri = metadata.url
+      setIpfs(uri)
+      const url = `https://ipfs.io/ipfs/${metadata.ipnft}`
+      setIpfsUri(url)
+      const { ethereum } = window
       if (ethereum) {
-        const provider = new ethers.providers.Web3Provider(ethereum);
-        const signer = provider.getSigner();
+        const provider = new ethers.providers.Web3Provider(ethereum)
+        const signer = provider.getSigner()
         const contract = new ethers.Contract(
           contractAddress,
           contractABI,
           signer
-        );
-        console.log("url", url);
+        )
+        console.log('url', url)
         //collectionname
-        ipfs && contract.mintNFT(name, ipfs, data.address); //todo name 因为合约创建不一致的原因，无法用
+        ipfs && contract.mintNFT(name, ipfs, data.address) //todo name 因为合约创建不一致的原因，无法用
       }
     } catch (err) {
-      console.log(err);
+      console.log(err)
     }
-  };
+  }
 
   return (
     <>
@@ -145,7 +105,7 @@ export default function Badge() {
           <div className="font-bold text-2xl">Choose Collection</div>
           <div className="flex gap-3">
             <select
-              onChange={(e) => setName(e.target.value)}
+              onChange={e => setName(e.target.value)}
               className="select select-bordered w-full max-w-xs"
             >
               <option disabled selected>
@@ -160,14 +120,14 @@ export default function Badge() {
                       label={item.name}
                     ></option>
                   </>
-                );
+                )
               })}
             </select>
             <div>
               <button
                 className="btn"
                 onClick={() => {
-                  console.log(name);
+                  console.log(name)
                 }}
               >
                 New
@@ -217,8 +177,8 @@ export default function Badge() {
                 className="border-solid border-gray-300 border py-1 mt-1 px-4 w-[400px] rounded text-gray-700"
                 placeholder=""
                 autoFocus
-                {...register("name", {
-                  required: "Please enter a your name.",
+                {...register('name', {
+                  required: 'Please enter a your name.'
                 })}
               />
             </div>
@@ -230,8 +190,8 @@ export default function Badge() {
                 className="border-solid border-gray-300 border py-1 mt-1 px-4 w-[400px] rounded text-gray-700"
                 placeholder=""
                 autoFocus
-                {...register("description", {
-                  required: "Please enter a your name.",
+                {...register('description', {
+                  required: 'Please enter a your name.'
                 })}
               />
             </div>
@@ -243,8 +203,8 @@ export default function Badge() {
                 className="border-solid border-gray-300 border py-1 mt-1 px-4 w-[400px] rounded text-gray-700"
                 placeholder=""
                 autoFocus
-                {...register("address", {
-                  required: "Please enter a your name.",
+                {...register('address', {
+                  required: 'Please enter a your name.'
                 })}
               />
             </div>
@@ -257,5 +217,5 @@ export default function Badge() {
         </div>
       </div>
     </>
-  );
+  )
 }

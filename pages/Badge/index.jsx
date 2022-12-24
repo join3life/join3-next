@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 import { useState, useContext } from 'react'
 import { NFTStorage } from 'nft.storage'
@@ -14,21 +13,20 @@ import { useAccount } from 'wagmi'
 import Organization from '../../contexts/Organization'
 import { convertSvgToFile } from '../../utils/tool'
 import { useEffect } from 'react'
-
+import { Select, Input } from 'antd'
 import { IoIosAddCircleOutline } from 'react-icons/io'
 import { BsArrowUpCircleFill } from 'react-icons/bs'
 
 // Exported Types
 
 export default function Badge() {
-  const router = useRouter()
   const { info } = useContext(Organization)
   console.log('info', info)
 
   const [collection, setCollection] = useState()
   useEffect(() => {
     if (info) {
-      setCollection([...info?.skills, ...info?.events, ...info?.projects])
+      setCollection([...info.skills, ...info.events, ...info.projects])
     }
   }, [])
 
@@ -66,6 +64,10 @@ export default function Badge() {
     const metadata = await client.store(nft)
     console.log('NFT data stored successfully 🚀🚀')
     return metadata
+  }
+
+  const handleChange = value => {
+    console.log(`selected ${value}`)
   }
 
   const onSubmit = async data => {
@@ -162,49 +164,71 @@ export default function Badge() {
           </div>
           <div className="mt-20">Step3</div>
           <div className="font-bold text-2xl">Set MetaData</div>
-        </div>
-
-        <div className="">
-          <div className="flex">
-            <form
-              action=""
-              className="max-w-xl w-screen m-auto py-10 px-8 border text-gray-700"
-              onSubmit={handleSubmit(onSubmit)}
-            >
-              <label htmlFor="">Name to the NFT</label>
+          <div className="mt-8 flex items-center gap-3">
+            <div className="font-bold text-xl w-[150px]">Traits</div>
+            <div className="font-bold">Projects</div>
+            <div className="bg-[#91D5FF] rounded-xl px-3 text-sm">
+              官网v2 build
+            </div>
+          </div>
+          <div className="mt-3 flex items-center gap-3">
+            <div className="w-[150px]"></div>
+            <div className="font-bold">Role</div>
+            <div className="">
+              <Select
+                mode="tags"
+                className="w-[200px]"
+                placeholder="Tags Role"
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+          <form className="text-gray-700" onSubmit={handleSubmit(onSubmit)}>
+            <div className="flex items-center">
+              <label htmlFor="" className="font-bold w-[150px]">
+                Name
+              </label>
               <input
-                className="border-solid border-gray-300 border py-1 mt-1 px-4 w-full rounded text-gray-700"
+                className="border-solid border-gray-300 border py-1 mt-1 px-4 w-[400px] rounded text-gray-700"
                 placeholder=""
                 autoFocus
                 {...register('name', {
                   required: 'Please enter a your name.'
                 })}
               />
-              <label htmlFor="">Description to the NFT</label>
+            </div>
+            <div className="flex items-center">
+              <label htmlFor="" className="font-bold w-[150px]">
+                Description
+              </label>
               <input
-                className="border-solid border-gray-300 border py-1 mt-1 px-4 w-full rounded text-gray-700"
+                className="border-solid border-gray-300 border py-1 mt-1 px-4 w-[400px] rounded text-gray-700"
                 placeholder=""
                 autoFocus
                 {...register('description', {
                   required: 'Please enter a your name.'
                 })}
               />
-              <label htmlFor="">Send to the Address</label>
+            </div>
+            <div className="flex items-center">
+              <label htmlFor="" className="font-bold w-[150px]">
+                Address
+              </label>
               <input
-                className="border-solid border-gray-300 border py-1 mt-1 px-4 w-full rounded text-gray-700"
+                className="border-solid border-gray-300 border py-1 mt-1 px-4 w-[400px] rounded text-gray-700"
                 placeholder=""
                 autoFocus
                 {...register('address', {
                   required: 'Please enter a your name.'
                 })}
               />
-              <div className="f-c-c mt-6">
-                <button className="btn" type="submit">
-                  Create
-                </button>
-              </div>
-            </form>
-          </div>
+            </div>
+            <div className="f-c-c mt-10">
+              <button className="btn" type="submit">
+                Create
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </>

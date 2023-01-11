@@ -5,6 +5,7 @@ interface UserProfile {
   wallet_address: string
   bio?: string
   avatar?: any
+  sbts?: any[]
 }
 
 export const editUserProfile = (params: Partial<UserProfile>) => {

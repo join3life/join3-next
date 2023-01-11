@@ -5,6 +5,8 @@ import type { UploadChangeParam } from 'antd/es/upload'
 import type { RcFile, UploadFile, UploadProps } from 'antd/es/upload/interface'
 import { MdDeleteForever } from 'react-icons/md'
 
+import { editUserProfile } from '../../api/user'
+
 const Edit = () => {
   const selectOptions = [
     {
@@ -78,11 +80,17 @@ const Edit = () => {
     console.log(`selected ${value}`)
   }
 
+  const onSave = () => {
+    // editUserProfile()
+  }
+
   return (
     <div className="px-[280px] py-[72px]">
       <div className="flex justify-between">
         <div className="text-[32px] font-bold">Edit Profile</div>
-        <div className="btn w-[100px] h-[40px]">Save</div>
+        <div className="btn w-[100px] h-[40px]" onClick={() => onSave()}>
+          Save
+        </div>
       </div>
       <div className="text-[#666] text-[16px] mt-16">Photo</div>
       <div>
